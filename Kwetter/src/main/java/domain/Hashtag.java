@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package domain;
 
 /**
  *
  * @author Ronal
  */
-public class Timeline {
-    private Account account;
+public class Hashtag {
+    String tag;
+    int number;
 
-    public Timeline(Account account) {
-        this.account = account;
+    public Hashtag(String tag, int number) {
+        this.tag = tag;
+        this.number = number;
     }
     
     

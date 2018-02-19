@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package domain;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class User extends Account{
     private List<Kweet> Mentions;
     
 
-    public User(String ProfilePhoto, List<User> FollowingAccounts, List<User> FollowersAccounts, List<Kweet> OwnKweets, List<Kweet> Mentions, int id, String username, String password, Models.Role role) {
+    public User(String ProfilePhoto, List<User> FollowingAccounts, List<User> FollowersAccounts, List<Kweet> OwnKweets, List<Kweet> Mentions, int id, String username, String password, domain.Role role) {
         super(id, username, password, role);
         this.ProfilePhoto = ProfilePhoto;
         this.FollowingAccounts = FollowingAccounts;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package domain;
 
 /**
  *
@@ -11,7 +11,7 @@ package Models;
  */
 public class Administrator extends Account{
     
-    public Administrator(int id, String username, String password, Models.Role role) {
+    public Administrator(int id, String username, String password, domain.Role role) {
         super(id, username, password, role);
     }
     

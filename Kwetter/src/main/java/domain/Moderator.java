@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package domain;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class Moderator extends Account{
     private List<Kweet> Kweets;
     private Administration Administration;
 
-    public Moderator(List<Kweet> Kweets, Administration Administration, int id, String username, String password, Models.Role role) {
+    public Moderator(List<Kweet> Kweets, Administration Administration, int id, String username, String password, domain.Role role) {
         super(id, username, password, role);
         this.Kweets = Kweets;
         this.Administration = Administration;
