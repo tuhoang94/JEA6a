@@ -10,5 +10,19 @@ package Models;
  * @author Ronal
  */
 public class Page {
+    String bio;
+    String location;
+    String website;
+    String thema;
+    Account account;
+
+    public Page(String bio, String location, String website, String thema, Account account) {
+        this.bio = bio;
+        this.location = location;
+        this.website = website;
+        this.thema = thema;
+        this.account = account;
+    }
+    
     
 }

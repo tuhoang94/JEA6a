@@ -10,5 +10,13 @@ package Models;
  * @author Ronal
  */
 public class Hashtag {
+    String tag;
+    int number;
+
+    public Hashtag(String tag, int number) {
+        this.tag = tag;
+        this.number = number;
+    }
+    
     
 }
