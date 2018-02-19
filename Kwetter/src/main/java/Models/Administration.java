@@ -5,10 +5,29 @@
  */
 package Models;
 
+import java.util.List;
+
 /**
  *
  * @author Ronal
  */
 public class Administration {
+    
+    private List<Account> accounts;
+
+    public Administration(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+    
+    public void editRole(Account account)
+    {
+        
+    }
+    
+    public List<Account> getAccounts()
+    {
+        //TODO
+        return null;
+    }
     
 }
