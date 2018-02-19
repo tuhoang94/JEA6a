@@ -9,6 +9,6 @@ package Models;
  *
  * @author Ronal
  */
-public class Kwetter {
+public class Administrator {
     
 }
