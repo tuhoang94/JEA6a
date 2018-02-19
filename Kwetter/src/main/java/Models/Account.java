@@ -11,5 +11,17 @@ package Models;
  */
 public class Account {
     
+    private int ID;
+    private String Username;
+    private String Password;
+    private Role Role;
+    
+    public Account(int id, String username, String password, Role role)
+    {
+        ID = id;
+        Username = username;
+        Password = password;
+        Role = role;
+    }
     
 }
