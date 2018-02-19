@@ -14,12 +14,66 @@ import java.util.List;
 public class User extends Account{
     
     private String ProfilePhoto;
-    private List<Account> FollowingAccounts;
-    private List<Account> FollowersAccount;
+    private List<User> FollowingAccounts;
+    private List<User> FollowersAccounts;
+    private List<Kweet> OwnKweets;
+    private List<Kweet> Mentions;
+    
 
-    public User(int id, String username, String password, Role role) {
+    public User(String ProfilePhoto, List<User> FollowingAccounts, List<User> FollowersAccounts, List<Kweet> OwnKweets, List<Kweet> Mentions, int id, String username, String password, Models.Role role) {
         super(id, username, password, role);
+        this.ProfilePhoto = ProfilePhoto;
+        this.FollowingAccounts = FollowingAccounts;
+        this.FollowersAccounts = FollowersAccounts;
+        this.OwnKweets = OwnKweets;
+        this.Mentions = Mentions;
     }
+    
+    public void EditUser()
+    {
+        //TODO
+    }
+    
+    public void likeKweet(Kweet kweet)
+    {
+        //TODO
+    }
+    
+    public Kweet getKwetter(int id)
+    {
+        //TODO
+        return null;
+    }
+    
+    public Kweet createKweet()
+    {
+        //TODO
+        return null;
+    }
+    
+   public List<User> getFollowers()
+   {
+       return this.FollowersAccounts;
+   }
+   
+   public List<User> getFollowing()
+   {
+       return this.FollowingAccounts;
+   }
+   
+   public void addFollower(User user)
+   {
+      this.FollowersAccounts.add(user);
+   }
+   
+   public void addFollowing(User user)
+   {
+       this.FollowingAccounts.add(user);
+   }
+
+
+    
+    
     
     
 }
