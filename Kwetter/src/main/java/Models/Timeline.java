@@ -10,5 +10,11 @@ package Models;
  * @author Ronal
  */
 public class Timeline {
+    private Account account;
+
+    public Timeline(Account account) {
+        this.account = account;
+    }
+    
     
 }
