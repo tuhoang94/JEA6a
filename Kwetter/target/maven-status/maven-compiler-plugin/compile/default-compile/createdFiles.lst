@@ -1,0 +1,10 @@
+domain\Role.class
+domain\Hashtag.class
+domain\Page.class
+domain\Timeline.class
+domain\Moderator.class
+domain\User.class
+domain\Kweet.class
+domain\Account.class
+domain\Administrator.class
+domain\Administration.class
