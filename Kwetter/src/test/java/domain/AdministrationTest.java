@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,6 +19,17 @@ import static org.junit.Assert.*;
  * @author jeroe
  */
 public class AdministrationTest {
+    int aID = 1;
+    String aName = "Jaap";
+    String aPsswd = "abcd";
+    Role aRole = Role.USER;
+    Account a = new Account(aID, aName, aPsswd, aRole);
+    
+    int bID = 2;
+    String bName = "Piet";
+    String bPsswd = "qwerty";
+    Role bRole = Role.MODERATOR;
+    Account b = new Account(bID, bName, bPsswd, bRole);        
     
     public AdministrationTest() {
     }
@@ -43,12 +55,14 @@ public class AdministrationTest {
      */
     @Test
     public void testEditRole() {
-        System.out.println("editRole");
-        Account account = null;
-        Administration instance = null;
-        instance.editRole(account);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Account> accounts = new ArrayList<>();
+        accounts.add(a);
+        accounts.add(b);
+        Administration adm = new Administration(accounts);
+        System.out.println("Administration EditRole");
+        adm.editRole(a, Role.BANNED);
+        assertEquals(Role.BANNED, a.GetRole());
+        fail("Rol van account is niet aangepast verwacht was: Banned resultaat is " + a.GetRole());
     }
 
     /**
@@ -56,13 +70,12 @@ public class AdministrationTest {
      */
     @Test
     public void testGetAccounts() {
-        System.out.println("getAccounts");
-        Administration instance = null;
-        List<Account> expResult = null;
-        List<Account> result = instance.getAccounts();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Account> accounts = new ArrayList<>();
+        accounts.add(a);
+        accounts.add(b);
+        Administration adm = new Administration(accounts);
+        assertEquals(accounts, adm.getAccounts());
+        fail("De lijst van accounts komt niet overeen met wat verwacht werd.");
     }
     
 }

@@ -11,17 +11,31 @@ package domain;
  */
 public class Account {
     
-    private int ID;
-    private String Username;
-    private String Password;
-    private Role Role;
+    private int id;
+    private String username;
+    private String password;
+    private Role role;
     
     public Account(int id, String username, String password, Role role)
     {
-        ID = id;
-        Username = username;
-        Password = password;
-        Role = role;
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+    
+    public Role GetRole()
+    {
+        return this.role;
+    }
+    public void SetRole(Role role)
+    {
+        this.role = role;
+    }
+    
+    public int GetID()
+    {
+        return this.id;
     }
     
 }
