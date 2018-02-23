@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,12 +14,10 @@ import java.util.List;
  */
 public class Moderator extends Account{
     
-    private List<Kweet> Kweets;
     private Administration Administration;
 
     public Moderator(List<Kweet> Kweets, Administration Administration, int id, String username, String password, domain.Role role) {
         super(id, username, password, role);
-        this.Kweets = Kweets;
         this.Administration = Administration;
     }
     
@@ -29,13 +28,12 @@ public class Moderator extends Account{
     
     public List<Kweet> getKweets()
     {
-       return this.Kweets;
+       return this.Administration.GetKweets();
     }
     
     public List<User> getUsers()
     {
-        //TODO
-        return null;
+        return this.Administration.GetUsers();
     }
     
     public void BanUser(Account account)

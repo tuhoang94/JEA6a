@@ -13,14 +13,27 @@ import java.util.List;
  */
 public class Administration {
 
-    private List<Account> accounts;
+    private List<Kweet> Kweets;
+    private List<User> users;
+    private List<Moderator> moderators;
 
-    public Administration(List<Account> accounts) {
-        this.accounts = accounts;
+    public Administration(List<User> Users, List<Moderator> Moderators, List<Kweet> Kweets) {
+        this.users = Users;
+        this.moderators = Moderators;
+        this.Kweets = Kweets;
     }
 
-    public List<Account> getAccounts() {
-        return this.accounts;
+    public List<User> GetUsers() {
+        return this.users;
+    }
+
+    public List<Moderator> GetModerators() {
+        return this.moderators;
+    }
+    
+    public List<Kweet> GetKweets()
+    {
+        return this.Kweets;
     }
 
 }

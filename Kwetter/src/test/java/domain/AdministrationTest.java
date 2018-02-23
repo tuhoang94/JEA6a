@@ -19,33 +19,57 @@ import static org.junit.Assert.*;
  * @author jeroe
  */
 public class AdministrationTest {
+
+    String aPF = "ProfilePhoto1";
+    List<User> aFollowing = new ArrayList<>();
+    List<User> aFollowers = new ArrayList<>();
+    List<Kweet> aOwnKweets = new ArrayList<>();
+    List<Kweet> aMentions = new ArrayList<>();
     int aID = 1;
     String aName = "Jaap";
     String aPsswd = "abcd";
     Role aRole = Role.USER;
-    Account a = new Account(aID, aName, aPsswd, aRole);
-    
+    User a = new User(aPF, aFollowing, aFollowers, aOwnKweets, aMentions, aID, aName, aPsswd, aRole);
+
+    String bPF = "ProfilePhoto2";
+    List<User> bFollowing = new ArrayList<>();
+    List<User> bFollowers = new ArrayList<>();
+    List<Kweet> bOwnKweets = new ArrayList<>();
+    List<Kweet> bMentions = new ArrayList<>();
     int bID = 2;
     String bName = "Piet";
-    String bPsswd = "qwerty";
-    Role bRole = Role.MODERATOR;
-    Account b = new Account(bID, bName, bPsswd, bRole);        
+    String bPsswd = "1234";
+    Role bRole = Role.USER;
+    User b = new User(bPF, bFollowing, bFollowers, bOwnKweets, bMentions, bID, bName, bPsswd, bRole);
+
+    String cPF = "ProfilePhoto1";
+    List<User> cFollowing = new ArrayList<>();
+    List<User> cFollowers = new ArrayList<>();
+    List<Kweet> cOwnKweets = new ArrayList<>();
+    List<Kweet> cMentions = new ArrayList<>();
+    int cID = 1;
+    String cName = "Jaap";
+    String cPsswd = "abcd";
+    Role cRole = Role.MODERATOR;
+    User c = new User(cPF, cFollowing, cFollowers, cOwnKweets, cMentions, cID, cName, cPsswd, cRole);
     
+   // Moderator d = new Moderator();
+
     public AdministrationTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -54,12 +78,17 @@ public class AdministrationTest {
      * Test of getAccounts method, of class Administration.
      */
     @Test
-    public void testGetAccounts() {
-        List<Account> accounts = new ArrayList<>();
-        accounts.add(a);
-        accounts.add(b);
-        Administration adm = new Administration(accounts);
-        assertEquals(accounts.size(), adm.getAccounts().size());
+    public void testGetUsers() {
+ 
+        List<User> users = new ArrayList<>();
+        users.add(a);
+        users.add(b);
+        users.add(c);
+        List<Moderator> mods = new ArrayList<>();
+//        mods.add(d);
+//        Administration adm = new Administration()
+//        Administration adm = new Administration(accounts);
+//        assertEquals(accounts.size(), adm.getAccounts().size());
     }
-    
+
 }

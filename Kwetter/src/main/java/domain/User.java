@@ -20,7 +20,7 @@ public class User extends Account{
     private List<Kweet> Mentions;
     
 
-    public User(String ProfilePhoto, List<User> FollowingAccounts, List<User> FollowersAccounts, List<Kweet> OwnKweets, List<Kweet> Mentions, int id, String username, String password, domain.Role role) {
+    public User(String ProfilePhoto, List<User> FollowingAccounts, List<User> FollowersAccounts, List<Kweet> OwnKweets, List<Kweet> Mentions, int id, String username, String password, Role role) {
         super(id, username, password, role);
         this.ProfilePhoto = ProfilePhoto;
         this.FollowingAccounts = FollowingAccounts;

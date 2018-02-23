@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: domain.ModeratorTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.003 sec <<< FAILURE!
-testDeleteKweet(domain.ModeratorTest)  Time elapsed: 0 sec  <<< ERROR!
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE!
+testDeleteKweet(domain.ModeratorTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException
 	at domain.ModeratorTest.testDeleteKweet(ModeratorTest.java:49)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

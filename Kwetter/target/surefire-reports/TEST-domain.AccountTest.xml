@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="1" name="domain.AccountTest" time="0.093" errors="0" skipped="0">
+<testsuite tests="1" failures="1" name="domain.AccountTest" time="0.137" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_162\jre\bin"/>
@@ -61,7 +61,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="domain.AccountTest" name="testSomeMethod" time="0.012">
+  <testcase classname="domain.AccountTest" name="testSomeMethod" time="0.017">
     <failure message="The test case is a prototype." type="java.lang.AssertionError">java.lang.AssertionError: The test case is a prototype.
 	at org.junit.Assert.fail(Assert.java:88)
 	at domain.AccountTest.testSomeMethod(AccountTest.java:43)
