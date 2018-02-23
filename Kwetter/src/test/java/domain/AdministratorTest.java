@@ -5,6 +5,8 @@
  */
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,22 +19,34 @@ import static org.junit.Assert.*;
  * @author jeroe
  */
 public class AdministratorTest {
-    
+
+    int aID = 1;
+    String aName = "Jaap";
+    String aPsswd = "abcd";
+    Role aRole = Role.USER;
+    Account a = new Account(aID, aName, aPsswd, aRole);
+
+    int bID = 2;
+    String bName = "Piet";
+    String bPsswd = "qwerty";
+    Role bRole = Role.MODERATOR;
+    Account b = new Account(bID, bName, bPsswd, bRole);
+
     public AdministratorTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -42,12 +56,10 @@ public class AdministratorTest {
      */
     @Test
     public void testEditRole() {
-        System.out.println("editRole");
-        Role role = null;
-        Administrator instance = null;
-        instance.editRole(role);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        Administrator admin = new Administrator(3, "Henk", "lol", Role.MODERATOR);
+        System.out.println("Administration EditRole");
+        admin.editRole(a, Role.MODERATOR);
+        assertEquals(Role.MODERATOR, a.GetRole());
     }
-    
 }

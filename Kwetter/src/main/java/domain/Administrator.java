@@ -9,14 +9,15 @@ package domain;
  *
  * @author Ronal
  */
-public class Administrator extends Account{
-    
-    public Administrator(int id, String username, String password, domain.Role role) {
+public class Administrator extends Account {
+
+    public Administrator(int id, String username, String password, Role role) {
         super(id, username, password, role);
     }
-    
-    public void editRole(Role role){
-        
+
+    public void editRole(Account account, Role role) {
+
+        account.SetRole(role);
     }
-    
+
 }

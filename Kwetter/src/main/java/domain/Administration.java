@@ -19,15 +19,6 @@ public class Administration {
         this.accounts = accounts;
     }
 
-    public void editRole(Account account, Role role) {
-        for (Account a : this.accounts) {
-            if (a.GetID() == account.GetID()) 
-            {
-               account.SetRole(role);
-            }
-        }
-    }
-
     public List<Account> getAccounts() {
         return this.accounts;
     }

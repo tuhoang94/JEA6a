@@ -24,19 +24,26 @@ public class Moderator extends Account{
     
     public void deleteKweet(Kweet kweet)
     {
-        //TODO
+       
     }
     
     public List<Kweet> getKweets()
     {
-        //TODO
-        return null;
+       return this.Kweets;
     }
     
     public List<User> getUsers()
     {
         //TODO
         return null;
+    }
+    
+    public void BanUser(Account account)
+    {
+        if (account.GetRole() == Role.USER)
+        {
+        account.SetRole(Role.BANNED);
+        }
     }
     
     
