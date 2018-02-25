@@ -16,11 +16,13 @@ public class Administration {
     private List<Kweet> Kweets;
     private List<User> users;
     private List<Moderator> moderators;
+    private List<Account> accounts;
 
-    public Administration(List<User> Users, List<Moderator> Moderators, List<Kweet> Kweets) {
+    public Administration(List<User> Users, List<Moderator> Moderators, List<Kweet> Kweets, List<Account> accounts) {
         this.users = Users;
         this.moderators = Moderators;
         this.Kweets = Kweets;
+        this.accounts = accounts;
     }
 
     public List<User> GetUsers() {
@@ -34,6 +36,10 @@ public class Administration {
     public List<Kweet> GetKweets()
     {
         return this.Kweets;
+    }
+    
+    public List<Account> GetAccounts(){
+        return this.accounts;
     }
 
 }

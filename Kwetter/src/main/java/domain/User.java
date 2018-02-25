@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,9 +24,9 @@ public class User extends Account{
     public User(String ProfilePhoto, List<User> FollowingAccounts, List<User> FollowersAccounts, List<Kweet> OwnKweets, List<Kweet> Mentions, int id, String username, String password, Role role) {
         super(id, username, password, role);
         this.ProfilePhoto = ProfilePhoto;
-        this.FollowingAccounts = FollowingAccounts;
-        this.FollowersAccounts = FollowersAccounts;
-        this.OwnKweets = OwnKweets;
+        this.FollowingAccounts = new ArrayList<User>();
+        this.FollowersAccounts = new ArrayList<User>();
+        this.OwnKweets = new ArrayList<Kweet>();
         this.Mentions = Mentions;
     }
     
