@@ -13,8 +13,9 @@ import java.util.List;
  *
  * @author Ronal
  */
-public class Kweet implements Comparable<Kweet>{
-    private int id;
+public class Kweet implements Comparable<Kweet> {
+
+    private Long id;
     private String message;
     private Date date;
     private User user;
@@ -22,21 +23,21 @@ public class Kweet implements Comparable<Kweet>{
     private List<User> mentions;
     private List<Hashtag> hashtags;
 
-    public Kweet(int id, String message, Date date, User user, List<User> likedAccounts, List<User> mentions, List<Hashtag> hashtags) {
+    public Kweet(Long id, String message, Date date, User user) {
         this.id = id;
         this.message = message;
         this.date = date;
         this.user = user;
-        this.likedAccounts = new ArrayList<User>();
-        this.mentions = new ArrayList<User>();
-        this.hashtags = new ArrayList<Hashtag>();
+        this.likedAccounts = new ArrayList<>();
+        this.mentions = new ArrayList<>();
+        this.hashtags = new ArrayList<>();
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -72,6 +73,18 @@ public class Kweet implements Comparable<Kweet>{
         this.likedAccounts = likedAccounts;
     }
 
+    public void addLike(User user) {
+        if (!likedAccounts.contains(user) && user != null) {
+            this.likedAccounts.add(user);
+        }
+    }
+
+    public void removeLike(User user) {
+        if (likedAccounts.contains(user) && user != null) {
+            this.likedAccounts.remove(user);
+        }
+    }
+
     public List<User> getMentions() {
         return mentions;
     }
@@ -87,18 +100,25 @@ public class Kweet implements Comparable<Kweet>{
     public void setHashtags(List<Hashtag> hashtags) {
         this.hashtags = hashtags;
     }
-    
+
+    public void addHashtag(Hashtag hashtag) {
+        if (!hashtags.contains(hashtag) && hashtag != null) {
+            this.hashtags.add(hashtag);
+        }
+    }
+
+    public void addMention(User mention) {
+        if (mention != null && !mentions.contains(mention)) {
+            mentions.add(user);
+            if (!mention.getMentions().contains(this)) {
+                mention.addMention(this);
+            }
+        }
+    }
+
     @Override
-    public int compareTo(Kweet k){
+    public int compareTo(Kweet k) {
         return this.date.compareTo(k.getDate());
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
 }
-    

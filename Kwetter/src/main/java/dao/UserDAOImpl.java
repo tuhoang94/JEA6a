@@ -26,9 +26,9 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public User GetUserById(int id) {
+    public User GetUserById(long id) {
         for(User user : users){
-            if(user.GetID() == id)
+            if(user.getID() == id)
             {
                 return user;
             }
@@ -49,8 +49,8 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public void EditUsername(User user) {
         for(User u : users){
-            if(u.GetID() == user.GetID()){
-                u.setUsername(user.GetUsername());
+            if(u.getID() == user.getID()){
+                u.setUsername(user.getUsername());
             }
         }
     }
@@ -58,7 +58,7 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public void AddFollowing(User user, User userFollowing) {
         for(User u : users){
-            if(u.GetID() == user.GetID()){
+            if(u.getID() == user.getID()){
                 u.addFollowing(userFollowing);
             }
         }
@@ -67,9 +67,27 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public void RemoveFollowing(User user, User userUnfollowing) {
         for(User u : users){
-            if(u.GetID() == user.GetID()){
+            if(u.getID() == user.getID()){
                 u.removeFollowing(userUnfollowing);
             }
         }    
+    }
+
+    @Override
+    public User GetUserByUsername(String username) {
+        for(User u : users){
+            if(u.getUsername() == username){
+                return u;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean login(String username, String password) {
+        if(GetUserByUsername(username) != null){
+            return GetUserByUsername(username).getPassword().equals(password);
+        }
+        return false;
     }
 }

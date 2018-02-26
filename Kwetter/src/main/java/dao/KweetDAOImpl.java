@@ -50,4 +50,25 @@ public class KweetDAOImpl implements KweetDAO {
         this.kweets.add(kweet);
     }
 
+    @Override
+    public List<Kweet> GetKweetByMentionId(long mentionId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Kweet> GetKweetByHashtagId(long hastagId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Kweet> GetKweetsByUser(long userId) {
+        List<Kweet> userKweets = new ArrayList<>();
+        for(Kweet k : this.kweets){
+            if(k.getUser().getID() == userId){
+                userKweets.add(k);
+            }
+        }
+        return userKweets;
+    }
+
 }

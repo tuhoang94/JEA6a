@@ -17,4 +17,9 @@ public interface KweetDAO {
     public Kweet GetKweetById(int id);
     public void DeleteKweet(Kweet kweet);    
     public void AddKweet(Kweet kweet);
+    public List<Kweet> GetKweetByMentionId(long mentionId);
+    public List<Kweet> GetKweetByHashtagId(long hastagId);
+    public List<Kweet> GetKweetsByUser(long userId);
+    
+    
 }

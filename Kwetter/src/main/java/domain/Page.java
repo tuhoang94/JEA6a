@@ -14,14 +14,14 @@ public class Page {
     String location;
     String website;
     String thema;
-    Account account;
+    User user;
 
-    public Page(String bio, String location, String website, String thema, Account account) {
+    public Page(String bio, String location, String website, String thema, User user) {
         this.bio = bio;
         this.location = location;
         this.website = website;
         this.thema = thema;
-        this.account = account;
+        this.user = user;
     }
     
     

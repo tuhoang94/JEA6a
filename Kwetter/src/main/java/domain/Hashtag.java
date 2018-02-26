@@ -10,13 +10,32 @@ package domain;
  * @author Ronal
  */
 public class Hashtag {
-    String tag;
-    int number;
+    private long id;
+    private String tag;
+    
 
-    public Hashtag(String tag, int number) {
+    public Hashtag(long id, String tag) {
         this.tag = tag;
-        this.number = number;
+        this.id=id;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+    
+    
     
     
 }

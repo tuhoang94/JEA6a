@@ -16,8 +16,10 @@ import java.util.List;
 public interface UserDAO {  
     
     public List<User> GetAllUsers();
-    public User GetUserById (int id);
+    public User GetUserById (long id);
+    public User GetUserByUsername(String username);
     public void AddUser(User user);
+    public boolean login(String username, String password);
     public void DeleteUser (User user);
     public void EditUsername (User user);   
     public void AddFollowing (User user, User userFollowing);
