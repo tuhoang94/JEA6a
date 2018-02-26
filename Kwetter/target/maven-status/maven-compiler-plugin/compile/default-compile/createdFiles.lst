@@ -1,10 +1,13 @@
 domain\Role.class
 domain\Hashtag.class
+dao\KweetDAO.class
+domain\Kweet.class
 domain\Page.class
+dao\UserDAO.class
 domain\Timeline.class
 domain\Moderator.class
 domain\User.class
-domain\Kweet.class
+dao\KweetDAOImpl.class
+dao\ModeratorDAO.class
+dao\UserDAOImpl.class
 domain\Account.class
-domain\Administrator.class
-domain\Administration.class

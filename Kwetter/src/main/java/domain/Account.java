@@ -15,7 +15,6 @@ public class Account {
     private String username;
     private String password;
     private Role role;
-    private Administration admin;
     
     public Account(int id, String username, String password, Role role)
     {
@@ -39,11 +38,12 @@ public class Account {
         return this.id;
     }
     
-    public void EditUsername(String username){
-        for(Account user : admin.GetAccounts()){
-            if(user.username.equals(username)) throw new IllegalArgumentException("Username already exist");
-            this.username = username;
-        }
-}
+    public void setUsername(String username){
+        this.username = username;
+    }
+    
+    public String GetUsername(){
+        return this.username;
+    }
     
 }

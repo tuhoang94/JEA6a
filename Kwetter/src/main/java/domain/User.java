@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class User extends Account{
     
+    
     private String ProfilePhoto;
     private List<User> FollowingAccounts;
     private List<User> FollowersAccounts;
@@ -27,17 +28,14 @@ public class User extends Account{
         this.FollowingAccounts = new ArrayList<User>();
         this.FollowersAccounts = new ArrayList<User>();
         this.OwnKweets = new ArrayList<Kweet>();
-        this.Mentions = Mentions;
+        this.Mentions = new ArrayList<Kweet>();
     }
+
     
-    public void EditUser()
-    {
-        //TODO
-    }
     
     public void likeKweet(Kweet kweet)
     {
-        //TODO
+        kweet.getLikedAccounts().add(this);
     }
     
     public Kweet getKwetter(int id)
@@ -46,10 +44,9 @@ public class User extends Account{
         return null;
     }
     
-    public Kweet createKweet()
+    public void createKweet(Kweet k)
     {
-        //TODO
-        return null;
+        this.OwnKweets.add(k);
     }
     
    public List<User> getFollowers()
@@ -64,12 +61,21 @@ public class User extends Account{
    
    public void addFollower(User user)
    {
-      this.FollowersAccounts.add(user);
+       if(!this.FollowersAccounts.contains(user)){
+            this.FollowersAccounts.add(user);
+       }
    }
    
    public void addFollowing(User user)
    {
-       this.FollowingAccounts.add(user);
+       if(!this.FollowingAccounts.contains(user)){
+            this.FollowingAccounts.add(user);
+       }
+   }
+   
+   public void removeFollowing(User user){
+       this.FollowingAccounts.remove(user);
+
    }
 
 

@@ -14,33 +14,35 @@ import java.util.List;
  */
 public class Moderator extends Account{
     
-    private Administration Administration;
+    private List<User> users;
+    private List<Kweet> kweets;
 
-    public Moderator(List<Kweet> Kweets, Administration Administration, int id, String username, String password, domain.Role role) {
+    public Moderator(int id, String username, String password, domain.Role role) {
         super(id, username, password, role);
-        this.Administration = Administration;
+        this.users = new ArrayList<User>();
+        this.kweets = new ArrayList<Kweet>();
     }
     
     public void deleteKweet(Kweet kweet)
     {
-       
+       this.kweets.remove(kweet);
     }
     
     public List<Kweet> getKweets()
     {
-       return this.Administration.GetKweets();
+       return this.kweets;
     }
     
     public List<User> getUsers()
     {
-        return this.Administration.GetUsers();
+        return this.users;
     }
     
-    public void BanUser(Account account)
+    public void EditRole(Account account, Role role)
     {
         if (account.GetRole() == Role.USER)
         {
-        account.SetRole(Role.BANNED);
+        account.SetRole(role);
         }
     }
     

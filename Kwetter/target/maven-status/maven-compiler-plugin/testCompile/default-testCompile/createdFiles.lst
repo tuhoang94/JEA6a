@@ -3,8 +3,5 @@ domain\AccountTest.class
 domain\RoleTest.class
 domain\TimelineTest.class
 domain\HashtagTest.class
-domain\UserTest.class
 domain\KweetTest.class
-domain\AdministrationTest.class
 domain\ModeratorTest.class
-domain\AdministratorTest.class
