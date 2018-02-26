@@ -1,7 +1,0 @@
-domain\PageTest.class
-domain\AccountTest.class
-domain\RoleTest.class
-domain\TimelineTest.class
-domain\HashtagTest.class
-domain\KweetTest.class
-domain\ModeratorTest.class

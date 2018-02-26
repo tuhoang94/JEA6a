@@ -84,7 +84,12 @@ public class AdministrationTest {
         users.add(a);
         users.add(b);
         users.add(c);
-        List<Moderator> mods = new ArrayList<>();
+        List<Moderator> mods;
+        mods = new ArrayList<>();
+        List<Account> accounts = new ArrayList<>();
+        List<Kweet> kweets = new ArrayList<>();
+        Administration admin = new Administration(users, mods, kweets, accounts);
+        assertEquals(admin.GetUsers().size(), users.size());
 //        mods.add(d);
 //        Administration adm = new Administration()
 //        Administration adm = new Administration(accounts);

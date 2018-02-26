@@ -43,11 +43,7 @@ public class UserTest {
      */
     @Test
     public void testEditUser() {
-        System.out.println("EditUser");
-        User instance = null;
-        instance.EditUser();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //todo
     }
 
     /**
@@ -83,13 +79,7 @@ public class UserTest {
      */
     @Test
     public void testCreateKweet() {
-        System.out.println("createKweet");
-        User instance = null;
-        Kweet expResult = null;
-        Kweet result = instance.createKweet();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //todo
     }
 
     /**
