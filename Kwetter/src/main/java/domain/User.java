@@ -75,7 +75,10 @@ public class User extends Account{
    
    public void removeFollowing(User user){
        this.FollowingAccounts.remove(user);
-
+   }
+   
+   public void removeFollower(User user){
+       this.FollowersAccounts.remove(user);
    }
 
 
