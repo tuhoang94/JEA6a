@@ -5,10 +5,7 @@
  */
 package dao;
 
-import domain.Kweet;
-import domain.Role;
 import domain.User;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -22,45 +19,22 @@ import static org.junit.Assert.*;
  * @author jeroe
  */
 public class UserDAOTest {
-
-    String aPF = "ProfilePhoto1";
-    List<User> aFollowing = new ArrayList<>();
-    List<User> aFollowers = new ArrayList<>();
-    List<Kweet> aOwnKweets = new ArrayList<>();
-    List<Kweet> aMentions = new ArrayList<>();
-    int aID = 1;
-    String aName = "Jaap";
-    String aPsswd = "abcd";
-    Role aRole = Role.USER;
-    User a = new User(aPF, aFollowing, aFollowers, aOwnKweets, aMentions, aID, aName, aPsswd, aRole);
-
-    String bPF = "ProfilePhoto2";
-    List<User> bFollowing = new ArrayList<>();
-    List<User> bFollowers = new ArrayList<>();
-    List<Kweet> bOwnKweets = new ArrayList<>();
-    List<Kweet> bMentions = new ArrayList<>();
-    int bID = 2;
-    String bName = "Piet";
-    String bPsswd = "1234";
-    Role bRole = Role.USER;
-    User b = new User(bPF, bFollowing, bFollowers, bOwnKweets, bMentions, bID, bName, bPsswd, bRole);
-    UserDAO udao = new UserDAOImpl();
-
+    
     public UserDAOTest() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() {
     }
-
+    
     @AfterClass
     public static void tearDownClass() {
     }
-
+    
     @Before
     public void setUp() {
     }
-
+    
     @After
     public void tearDown() {
     }
@@ -85,10 +59,25 @@ public class UserDAOTest {
     @Test
     public void testGetUserById() {
         System.out.println("GetUserById");
-        int id = 0;
+        long id = 0L;
         UserDAO instance = new UserDAOImpl();
         User expResult = null;
         User result = instance.GetUserById(id);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of GetUserByUsername method, of class UserDAO.
+     */
+    @Test
+    public void testGetUserByUsername() {
+        System.out.println("GetUserByUsername");
+        String username = "";
+        UserDAO instance = new UserDAOImpl();
+        User expResult = null;
+        User result = instance.GetUserByUsername(username);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -99,32 +88,28 @@ public class UserDAOTest {
      */
     @Test
     public void testAddUser() {
-        udao.AddUser(a);
-        List<User> users = new ArrayList<>();
-        users.add(a);
-        udao.AddUser(a);
-        assertEquals(udao.GetAllUsers().size(), users.size());
+        System.out.println("AddUser");
+        User user = null;
+        UserDAO instance = new UserDAOImpl();
+        instance.AddUser(user);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**
-     * Test of AddFollowing method, of class UserDAO.
+     * Test of login method, of class UserDAO.
      */
     @Test
-    public void testAddFollowing() {
-        udao.AddFollowing(a, b);
-        a.addFollowing(b);
-        
-    }
-
-    /**
-     * Test of RemoveFollowing method, of class UserDAO.
-     */
-    @Test
-    public void testRemoveFollowing() {
-        udao.RemoveFollowing(a, b);
-        a.removeFollowing(b);
-        assertEquals(a.getFollowing().size(), 0);
-
+    public void testLogin() {
+        System.out.println("login");
+        String username = "";
+        String password = "";
+        UserDAO instance = new UserDAOImpl();
+        boolean expResult = false;
+        boolean result = instance.login(username, password);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**
@@ -132,8 +117,53 @@ public class UserDAOTest {
      */
     @Test
     public void testDeleteUser() {
-        udao.DeleteUser(a);
-        assertEquals(udao.GetAllUsers().size(), 0);
+        System.out.println("DeleteUser");
+        User user = null;
+        UserDAO instance = new UserDAOImpl();
+        instance.DeleteUser(user);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of EditUsername method, of class UserDAO.
+     */
+    @Test
+    public void testEditUsername() {
+        System.out.println("EditUsername");
+        User user = null;
+        UserDAO instance = new UserDAOImpl();
+        instance.EditUsername(user);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of AddFollowing method, of class UserDAO.
+     */
+    @Test
+    public void testAddFollowing() {
+        System.out.println("AddFollowing");
+        User user = null;
+        User userFollowing = null;
+        UserDAO instance = new UserDAOImpl();
+        instance.AddFollowing(user, userFollowing);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of RemoveFollowing method, of class UserDAO.
+     */
+    @Test
+    public void testRemoveFollowing() {
+        System.out.println("RemoveFollowing");
+        User user = null;
+        User userUnfollowing = null;
+        UserDAO instance = new UserDAOImpl();
+        instance.RemoveFollowing(user, userUnfollowing);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     public class UserDAOImpl implements UserDAO {
@@ -142,11 +172,19 @@ public class UserDAOTest {
             return null;
         }
 
-        public User GetUserById(int id) {
+        public User GetUserById(long id) {
+            return null;
+        }
+
+        public User GetUserByUsername(String username) {
             return null;
         }
 
         public void AddUser(User user) {
+        }
+
+        public boolean login(String username, String password) {
+            return false;
         }
 
         public void DeleteUser(User user) {
@@ -161,5 +199,5 @@ public class UserDAOTest {
         public void RemoveFollowing(User user, User userUnfollowing) {
         }
     }
-
+    
 }

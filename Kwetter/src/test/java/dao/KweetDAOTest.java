@@ -94,6 +94,51 @@ public class KweetDAOTest {
         fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of GetKweetByMentionId method, of class KweetDAO.
+     */
+    @Test
+    public void testGetKweetByMentionId() {
+        System.out.println("GetKweetByMentionId");
+        long mentionId = 0L;
+        KweetDAO instance = new KweetDAOImpl();
+        List<Kweet> expResult = null;
+        List<Kweet> result = instance.GetKweetByMentionId(mentionId);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of GetKweetByHashtagId method, of class KweetDAO.
+     */
+    @Test
+    public void testGetKweetByHashtagId() {
+        System.out.println("GetKweetByHashtagId");
+        long hastagId = 0L;
+        KweetDAO instance = new KweetDAOImpl();
+        List<Kweet> expResult = null;
+        List<Kweet> result = instance.GetKweetByHashtagId(hastagId);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of GetKweetsByUser method, of class KweetDAO.
+     */
+    @Test
+    public void testGetKweetsByUser() {
+        System.out.println("GetKweetsByUser");
+        long userId = 0L;
+        KweetDAO instance = new KweetDAOImpl();
+        List<Kweet> expResult = null;
+        List<Kweet> result = instance.GetKweetsByUser(userId);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
     public class KweetDAOImpl implements KweetDAO {
 
         public List<Kweet> GetAllKweets() {
@@ -108,6 +153,18 @@ public class KweetDAOTest {
         }
 
         public void AddKweet(Kweet kweet) {
+        }
+
+        public List<Kweet> GetKweetByMentionId(long mentionId) {
+            return null;
+        }
+
+        public List<Kweet> GetKweetByHashtagId(long hastagId) {
+            return null;
+        }
+
+        public List<Kweet> GetKweetsByUser(long userId) {
+            return null;
         }
     }
     
