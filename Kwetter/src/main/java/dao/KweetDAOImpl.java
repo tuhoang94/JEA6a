@@ -5,7 +5,9 @@
  */
 package dao;
 
+import domain.Hashtag;
 import domain.Kweet;
+import domain.User;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class KweetDAOImpl implements KweetDAO {
     }
 
     @Override
-    public Kweet GetKweetById(int id) {
+    public Kweet GetKweetById(long id) {
         for (Kweet kweet : kweets) {
             if (kweet.getId() == id) {
                 return kweet;
@@ -51,20 +53,38 @@ public class KweetDAOImpl implements KweetDAO {
     }
 
     @Override
-    public List<Kweet> GetKweetByMentionId(long mentionId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Kweet> GetKweetByMentionUsername(String username) {
+        List<Kweet> _mentionKweets = new ArrayList<>();
+        for (Kweet k : kweets){
+            for(User user : k.getMentions()){
+                if(user.getUsername() == username){
+                    _mentionKweets.add(k);
+                }
+            }
+        }
+        return _mentionKweets;
+       
     }
 
     @Override
     public List<Kweet> GetKweetByHashtagId(long hastagId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Kweet> _hastagKweets = new ArrayList<>();
+        for (Kweet k : kweets) {
+            for (Hashtag hashtag : k.getHashtags()) {
+                if (hashtag.getId() == hastagId) {
+                    _hastagKweets.add(k);
+
+                }
+            }
+        }
+        return _hastagKweets;
     }
 
     @Override
     public List<Kweet> GetKweetsByUser(long userId) {
         List<Kweet> userKweets = new ArrayList<>();
-        for(Kweet k : this.kweets){
-            if(k.getUser().getID() == userId){
+        for (Kweet k : this.kweets) {
+            if (k.getUser().getID() == userId) {
                 userKweets.add(k);
             }
         }
