@@ -24,26 +24,32 @@ import static org.junit.Assert.*;
 public class UserDAOTest {
 
     String aPF = "ProfilePhoto1";
-    List<User> aFollowing = new ArrayList<>();
-    List<User> aFollowers = new ArrayList<>();
-    List<Kweet> aOwnKweets = new ArrayList<>();
-    List<Kweet> aMentions = new ArrayList<>();
-    int aID = 1;
+    Long aID = 123l;
     String aName = "Jaap";
     String aPsswd = "abcd";
     Role aRole = Role.USER;
-    User a = new User(aPF, aFollowing, aFollowers, aOwnKweets, aMentions, aID, aName, aPsswd, aRole);
+    User a = new User(aID, aRole, aName, aPsswd, aPF);
 
     String bPF = "ProfilePhoto2";
-    List<User> bFollowing = new ArrayList<>();
-    List<User> bFollowers = new ArrayList<>();
-    List<Kweet> bOwnKweets = new ArrayList<>();
-    List<Kweet> bMentions = new ArrayList<>();
-    int bID = 2;
+    Long bID = 8879l;
     String bName = "Piet";
     String bPsswd = "1234";
     Role bRole = Role.USER;
-    User b = new User(bPF, bFollowing, bFollowers, bOwnKweets, bMentions, bID, bName, bPsswd, bRole);
+    User b = new User(bID, bRole, bName, bPsswd, bPF);
+
+    String cPF = "ProfilePhoto3";
+    Long cID = 877767l;
+    String cName = "Karel";
+    String cPsswd = "defg";
+    Role cRole = Role.USER;
+    User c = new User(cID, cRole, cName, cPsswd, cPF);
+
+    String dPF = "ProfilePhoto4";
+    Long dID = 22343l;
+    String dName = "Henk";
+    String dPsswd = "678";
+    Role dRole = Role.USER;
+    User d = new User(dID, dRole, dName, dPsswd, dPF);
     UserDAO udao = new UserDAOImpl();
 
     public UserDAOTest() {
@@ -65,45 +71,28 @@ public class UserDAOTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of GetAllUsers method, of class UserDAO.
-     */
-    @Test
-    public void testGetAllUsers() {
-        System.out.println("GetAllUsers");
-        UserDAO instance = new UserDAOImpl();
-        List<User> expResult = null;
-        List<User> result = instance.GetAllUsers();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of GetUserById method, of class UserDAO.
      */
     @Test
     public void testGetUserById() {
-        System.out.println("GetUserById");
-        int id = 0;
-        UserDAO instance = new UserDAOImpl();
-        User expResult = null;
-        User result = instance.GetUserById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(udao.GetUserById(aID).getID(), aID);
+    }
+
+    @Test
+    public void testGetUserByName() {
+        assertEquals(udao.GetUserByUsername(aName).getID(), aID);
     }
 
     /**
      * Test of AddUser method, of class UserDAO.
      */
     @Test
-    public void testAddUser() {
+    public void testAddUserGetAllUsers() {
         udao.AddUser(a);
-        List<User> users = new ArrayList<>();
-        users.add(a);
-        udao.AddUser(a);
-        assertEquals(udao.GetAllUsers().size(), users.size());
+        udao.AddUser(b);
+        assertEquals(udao.GetAllUsers().size(), 2);
     }
 
     /**
@@ -113,7 +102,7 @@ public class UserDAOTest {
     public void testAddFollowing() {
         udao.AddFollowing(a, b);
         a.addFollowing(b);
-        
+
     }
 
     /**
@@ -132,34 +121,33 @@ public class UserDAOTest {
      */
     @Test
     public void testDeleteUser() {
-        udao.DeleteUser(a);
-        assertEquals(udao.GetAllUsers().size(), 0);
+        udao.DeleteUser(b);
+        assertEquals(udao.GetAllUsers().size(), 1);
     }
 
-    public class UserDAOImpl implements UserDAO {
-
-        public List<User> GetAllUsers() {
-            return null;
-        }
-
-        public User GetUserById(int id) {
-            return null;
-        }
-
-        public void AddUser(User user) {
-        }
-
-        public void DeleteUser(User user) {
-        }
-
-        public void EditUsername(User user) {
-        }
-
-        public void AddFollowing(User user, User userFollowing) {
-        }
-
-        public void RemoveFollowing(User user, User userUnfollowing) {
-        }
-    }
-
+//    public class UserDAOImpl implements UserDAO {
+//
+//        public List<User> GetAllUsers() {
+//            return null;
+//        }
+//
+//        public User GetUserById(int id) {
+//            return null;
+//        }
+//
+//        public void AddUser(User user) {
+//        }
+//
+//        public void DeleteUser(User user) {
+//        }
+//
+//        public void EditUsername(User user) {
+//        }
+//
+//        public void AddFollowing(User user, User userFollowing) {
+//        }
+//
+//        public void RemoveFollowing(User user, User userUnfollowing) {
+//        }
+//    }
 }

@@ -6,6 +6,9 @@
 package dao;
 
 import domain.Kweet;
+import domain.Role;
+import domain.User;
+import java.util.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,38 +22,40 @@ import static org.junit.Assert.*;
  * @author jeroe
  */
 public class KweetDAOTest {
-    
+
+    Long aid = 123l;
+    Long kid = 456l;
+    Date kd = new Date();
+    User a = new User(aid, Role.USER, "aUsername", "aPassword", "aProfilePhoto");
+    Kweet k = new Kweet(kid, "test123", kd, a);
+    Long cid = 888l;
+    User c = new User(cid, Role.USER, "cUsername", "cPassword", "cProfilePhoto");
+    KweetDAO kdao;
+
     public KweetDAOTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
 
-    /**
-     * Test of GetAllKweets method, of class KweetDAO.
-     */
+
     @Test
-    public void testGetAllKweets() {
-        System.out.println("GetAllKweets");
-        KweetDAO instance = new KweetDAOImpl();
-        List<Kweet> expResult = null;
-        List<Kweet> result = instance.GetAllKweets();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testAddKweet() {
+        kdao.AddKweet(k);
+        assertEquals(kdao.GetAllKweets().size(), 1);
     }
 
     /**
@@ -58,14 +63,7 @@ public class KweetDAOTest {
      */
     @Test
     public void testGetKweetById() {
-        System.out.println("GetKweetById");
-        int id = 0;
-        KweetDAO instance = new KweetDAOImpl();
-        Kweet expResult = null;
-        Kweet result = instance.GetKweetById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(kdao.GetKweetById(kid).getId(), k.getId());
     }
 
     /**
@@ -73,42 +71,37 @@ public class KweetDAOTest {
      */
     @Test
     public void testDeleteKweet() {
-        System.out.println("DeleteKweet");
-        Kweet kweet = null;
-        KweetDAO instance = new KweetDAOImpl();
-        instance.DeleteKweet(kweet);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        kdao.DeleteKweet(k);
+        assertEquals(kdao.GetAllKweets().size(), 0);
     }
 
     /**
      * Test of AddKweet method, of class KweetDAO.
      */
-    @Test
-    public void testAddKweet() {
-        System.out.println("AddKweet");
-        Kweet kweet = null;
-        KweetDAO instance = new KweetDAOImpl();
-        instance.AddKweet(kweet);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    public class KweetDAOImpl implements KweetDAO {
+//    public class KweetDAOImpl {
+//
+//        Long aid = 123l;
+//        Long kid = 456l;
+//        Date kd = new Date();
+//        User a = new User(aid, Role.USER, "aUsername", "aPassword", "aProfilePhoto");
+//        Kweet k = new Kweet(kid, "test123", kd, a);
+//        Long cid = 888l;
+//        User c = new User(cid, Role.USER, "cUsername", "cPassword", "cProfilePhoto");
+//
+//        public List<Kweet> GetAllKweets() {
+//            return null;
+//        }
+//
+//        public Kweet GetKweetById(int id) {
+//            return null;
+//        }
+//
+//        public void DeleteKweet(Kweet kweet) {
+//        }
+//
+//        public void AddKweet(Kweet kweet) {
+//        }
+//    }
 
-        public List<Kweet> GetAllKweets() {
-            return null;
-        }
-
-        public Kweet GetKweetById(int id) {
-            return null;
-        }
-
-        public void DeleteKweet(Kweet kweet) {
-        }
-
-        public void AddKweet(Kweet kweet) {
-        }
-    }
-    
 }
