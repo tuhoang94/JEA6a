@@ -22,6 +22,6 @@ public interface UserDAO {
     public boolean login(String username, String password);
     public void DeleteUser (User user);
     public void EditUsername (User user);   
-    public void AddFollowing (User user, User userFollowing);
-    public void RemoveFollowing(User user, User userUnfollowing);
+    public void followUser (User user, User otherUser);
+    public void unfollowUser(User user, User otherUser);
 }

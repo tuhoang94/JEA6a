@@ -12,20 +12,19 @@ import java.util.List;
  *
  * @author Ronal
  */
-public class User{
-    
+public class User {
+
     private Long id;
     private Role role;
     private String username;
     private String password;
     private Page pageInfo;
-    
+
     private String profilePhoto;
-    private List<User> followingAccounts = new ArrayList<>();
-    private List<User> followersAccounts = new ArrayList<>();
-    private List<Kweet> kweets = new ArrayList<>();
-    private List<Kweet> mentions = new ArrayList<>();
-    
+    private List<User> followingAccounts;
+    private List<User> followersAccounts;
+    private List<Kweet> kweets;
+    private List<Kweet> mentions;
 
     public User(Long id, Role role, String username, String password, String profilePhoto) {
         this.id = id;
@@ -33,15 +32,28 @@ public class User{
         this.username = username;
         this.password = password;
         this.profilePhoto = profilePhoto;
+        this.followersAccounts = new ArrayList<>();
+        this.followersAccounts = new ArrayList<>();
+        this.kweets = new ArrayList<>();
+        this.mentions = new ArrayList<>();
+
     }
-    
-    
-    public Long getID(){
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.followersAccounts = new ArrayList<>();
+        this.followersAccounts = new ArrayList<>();
+        this.kweets = new ArrayList<>();
+        this.mentions = new ArrayList<>();
+    }
+
+    public Long getID() {
         return id;
     }
-    
-    public void SetID(Long id){
-        this.id  =id;
+
+    public void SetID(Long id) {
+        this.id = id;
     }
 
     public Role getRole() {
@@ -67,12 +79,12 @@ public class User{
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    public Page getPage(){
+
+    public Page getPage() {
         return pageInfo;
     }
-    
-    public void setPage(Page page){
+
+    public void setPage(Page page) {
         this.pageInfo = page;
     }
 
@@ -92,47 +104,41 @@ public class User{
         this.kweets = kweets;
     }
 
-    public void likeKweet(Kweet kweet)
-    {
+    public void likeKweet(Kweet kweet) {
         kweet.getLikedAccounts().add(this);
     }
-    
-    public void createKweet(Kweet k)
-    {
+
+    public void createKweet(Kweet k) {
         this.kweets.add(k);
     }
-    
-   public List<User> getFollowers()
-   {
-       return this.followersAccounts;
-   }
-   
-   public List<User> getFollowing()
-   {
-       return this.followingAccounts;
-   }
-   
-   public void addFollower(User user)
-   {
-       if(!this.followersAccounts.contains(user)){
+
+    public List<User> getFollowers() {
+        return this.followersAccounts;
+    }
+
+    public List<User> getFollowing() {
+        return this.followingAccounts;
+    }
+
+    public void addFollower(User user) {
+        if (!this.followersAccounts.contains(user)) {
             this.followersAccounts.add(user);
-       }
-   }
-   
-   public void addFollowing(User user)
-   {
-       if(!this.followingAccounts.contains(user)){
+        }
+    }
+
+    public void addFollowing(User user) {
+        if (!this.followingAccounts.contains(user)) {
             this.followingAccounts.add(user);
-       }
-   }
-   
-   public void removeFollowing(User user){
-       this.followingAccounts.remove(user);
-   }
-   
-   public void removeFollower(User user){
-       this.followersAccounts.remove(user);
-   }
+        }
+    }
+
+    public void removeFollowing(User user) {
+        this.followingAccounts.remove(user);
+    }
+
+    public void removeFollower(User user) {
+        this.followersAccounts.remove(user);
+    }
 
     public List<Kweet> getMentions() {
         return mentions;
@@ -141,14 +147,9 @@ public class User{
     public void setMentions(List<Kweet> mentions) {
         this.mentions = mentions;
     }
-   
-   public void addMention(Kweet k){
-       this.mentions.add(k);
-   }
 
+    public void addMention(Kweet k) {
+        this.mentions.add(k);
+    }
 
-    
-    
-    
-    
 }

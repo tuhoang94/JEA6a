@@ -56,21 +56,19 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void AddFollowing(User user, User userFollowing) {
-        for(User u : users){
-            if(u.getID() == user.getID()){
-                u.addFollowing(userFollowing);
-            }
+    public void followUser(User user, User otherUser) {
+        if(user!=null && otherUser !=null){
+            user.addFollowing(otherUser);
+            otherUser.addFollower(user);
         }
     }
 
     @Override
-    public void RemoveFollowing(User user, User userUnfollowing) {
-        for(User u : users){
-            if(u.getID() == user.getID()){
-                u.removeFollowing(userUnfollowing);
-            }
-        }    
+    public void unfollowUser(User user, User otherUser) {
+        if(user!=null && otherUser !=null){
+            user.removeFollowing(otherUser);
+            otherUser.removeFollower(user);
+        } 
     }
 
     @Override

@@ -21,8 +21,12 @@ public interface UserService {
     User findUserById(long id);
 
     List<User> findAllUsers();
-    
-    void addFollower(int followingId, int id);
 
-    void stopFollowing(int followingId, int id);
+    void followUser(User user, User otherUser) throws Exception;
+
+    void unfollowUser(User user, User otherUser) throws Exception;
+    
+    User getUserByUsername(String username);
+    
+    void deleteUser(User user);
 }
