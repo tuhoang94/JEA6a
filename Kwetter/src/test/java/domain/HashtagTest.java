@@ -17,6 +17,8 @@ import static org.junit.Assert.*;
  * @author jeroe
  */
 public class HashtagTest {
+    Long htid = 123l;
+    Hashtag ht = new Hashtag(htid, "test");
     
     public HashtagTest() {
     }
@@ -35,6 +37,42 @@ public class HashtagTest {
     
     @After
     public void tearDown() {
+    }
+
+    /**
+     * Test of getId method, of class Hashtag.
+     */
+    @Test
+    public void testGetId() {
+        
+        assertEquals(ht.getId(), 123l);
+    }
+
+    /**
+     * Test of setId method, of class Hashtag.
+     */
+    @Test
+    public void testSetId() {
+        Long i = 345l;
+        ht.setId(i);
+        assertEquals(ht.getId(), 345l);
+    }
+
+    /**
+     * Test of getTag method, of class Hashtag.
+     */
+    @Test
+    public void testGetTag() {
+        assertEquals(ht.getTag(), "test");
+    }
+
+    /**
+     * Test of setTag method, of class Hashtag.
+     */
+    @Test
+    public void testSetTag() {
+        ht.setTag("abba");
+        assertEquals(ht.getTag(), "abba");
     }
     
 }
