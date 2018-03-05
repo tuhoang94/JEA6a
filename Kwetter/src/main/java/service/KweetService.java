@@ -19,6 +19,8 @@ public interface KweetService {
     User getLoggedInUser();
 
     List<Kweet> getMentionsFromUser(User user);
+    
+    List<Kweet> getKweetByHastagId(long id);
 
     List<Kweet> getTweetsFromUser(User user);
     

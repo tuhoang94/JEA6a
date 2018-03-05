@@ -18,7 +18,7 @@ public interface UserService {
 
     void editUsername(String username);
 
-    User findUserById(int id);
+    User findUserById(long id);
 
     List<User> findAllUsers();
     

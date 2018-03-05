@@ -59,5 +59,10 @@ public class KweetServiceImpl implements KweetService{
     public Kweet getKweetById(long id) {
         return this.kweetDao.GetKweetById(id);
     }
+
+    @Override
+    public List<Kweet> getKweetByHastagId(long id) {
+        return this.kweetDao.GetKweetByHashtagId(id);
+    }
     
 }
