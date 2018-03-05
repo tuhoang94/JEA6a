@@ -14,10 +14,10 @@ import java.util.List;
  */
 public interface KweetDAO {
     public List<Kweet> GetAllKweets();
-    public Kweet GetKweetById(int id);
+    public Kweet GetKweetById(long id);
     public void DeleteKweet(Kweet kweet);    
     public void AddKweet(Kweet kweet);
-    public List<Kweet> GetKweetByMentionId(long mentionId);
+    public List<Kweet> GetKweetByMentionUsername(String username);
     public List<Kweet> GetKweetByHashtagId(long hastagId);
     public List<Kweet> GetKweetsByUser(long userId);
     

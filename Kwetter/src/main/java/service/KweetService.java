@@ -24,9 +24,9 @@ public interface KweetService {
     
     void createKweet(Kweet kweet);
     
-    void delete(int id, User user);
+    void deleteKweet(long id);
     
-    Kweet getKweetById(int id);
+    Kweet getKweetById(long id);
     
 
 }

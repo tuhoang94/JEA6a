@@ -21,9 +21,11 @@ public class KweetServiceImpl implements KweetService{
     
     private UserDAO userDao;
     
+    private User loggedInUser;
+    
     @Override
     public List<Kweet> findallKweets() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.kweetDao.GetAllKweets();
     }
 
     @Override
@@ -33,31 +35,29 @@ public class KweetServiceImpl implements KweetService{
 
     @Override
     public List<Kweet> getMentionsFromUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.kweetDao.GetKweetByMentionUsername(user.getUsername());
     }
 
     @Override
     public List<Kweet> getTweetsFromUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.kweetDao.GetKweetsByUser(user.getID());
     }
 
     @Override
     public void createKweet(Kweet kweet) {
-        User user = userDao.GetUserById(kweet.getUser().GetID());
-        if (user!=null){
-            kweetDao.AddKweet(kweet);
-            user.createKweet(kweet);
-        }
+        this.kweetDao.AddKweet(kweet);
     }
 
     @Override
-    public void delete(int id, User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteKweet(long id) {
+        Kweet kweet = this.getKweetById(id);
+        this.kweetDao.DeleteKweet(kweet);
+
     }
 
     @Override
-    public Kweet getKweetById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Kweet getKweetById(long id) {
+        return this.kweetDao.GetKweetById(id);
     }
     
 }
