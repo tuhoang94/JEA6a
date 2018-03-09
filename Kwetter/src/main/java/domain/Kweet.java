@@ -48,7 +48,7 @@ public class Kweet implements Comparable<Kweet> {
     private String message;
     @Column(name = "date")
     private Date date;
-    @Column(name = "location")
+    @Column(name = "owner")
     private User user;
     private List<User> likedAccounts;
     private List<User> mentions;

@@ -42,12 +42,14 @@ public class User {
     @Id
     @Column(name = "id")
     private Long id;
-
+    
+    @Enumerated(EnumType.STRING)
     private Role role;
     @Column(name = "username")
     private String username;
     @Column(name = "password")
     private String password;
+    @Column
     private Page pageInfo;
 
     @Column(name = "profilephoto")

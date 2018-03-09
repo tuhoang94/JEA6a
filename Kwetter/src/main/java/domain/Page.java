@@ -10,13 +10,15 @@ package domain;
  * @author Ronal
  */
 public class Page {
+    String id;
     String bio;
     String location;
     String website;
     String thema;
     User user;
 
-    public Page(String bio, String location, String website, String thema, User user) {
+    public Page(String id, String bio, String location, String website, String thema, User user) {
+        this.id = id;
         this.bio = bio;
         this.location = location;
         this.website = website;
