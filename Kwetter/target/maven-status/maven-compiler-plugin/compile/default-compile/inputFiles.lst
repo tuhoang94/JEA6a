@@ -6,12 +6,15 @@ C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\domain\User.java
 C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\dao\KweetDAOJPaController.java
 C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\service\KweetServiceImpl.java
 C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\dao\KweetDAOImpl.java
+C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\rest\UserREST.java
 C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\service\KweetService.java
 C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\domain\Kweet.java
 C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\dao\UserDAO_CollectionController.java
 C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\dao\UserDAO.java
 C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\service\UserService.java
 C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\dao\KweetDAO_CollectionController.java
+C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\rest\KweetREST.java
+C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\rest\CORSFilter.java
 C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\dao\KweetDAO.java
 C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\service\UserServiceImpl.java
 C:\Users\jeroe\Documents\JEA\JEA6a\JEA6a\Kwetter\src\main\java\domain\Hashtag.java
