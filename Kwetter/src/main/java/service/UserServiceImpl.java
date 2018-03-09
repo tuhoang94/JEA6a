@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(int id) {
+    public User findUserById(long id) {
         return userDAO.GetUserById(id);
     }
 
@@ -39,32 +39,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addFollower(int followingId, int id) {
-        if (followingId != id) {
-            User user = userDAO.GetUserById(id);
-            User userFollowing = userDAO.GetUserById(followingId);
-            if (user != userFollowing) {
-                user.addFollowing(userFollowing);
-                userFollowing.addFollower(user);
-                
-                userDAO.AddFollowing(user, userFollowing);
-                //TODO: userdao addfollower
-            }
+    public User getUserByUsername(String username) {
+        return this.userDAO.GetUserByUsername(username);
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        this.userDAO.DeleteUser(user);
+    }
+
+    @Override
+    public void followUser(User user, User otherUser) throws Exception {
+        if (user != otherUser) {
+            this.userDAO.followUser(user, otherUser);
+        } else {
+            throw new Exception("Cannot follow yourself");
         }
     }
 
     @Override
-    public void stopFollowing(int followingId, int id) {
-        if (followingId != id) {
-            User user = userDAO.GetUserById(id);
-            User userFollowing = userDAO.GetUserById(followingId);
-            if (user != userFollowing) {
-                user.removeFollowing(userFollowing);
-                userFollowing.removeFollower(user);
-                
-                //TODO
-                //userdao for both
-            }
+    public void unfollowUser(User user, User otherUser) throws Exception {
+        if (user != otherUser) {
+            this.userDAO.unfollowUser(user, otherUser);
+        } else {
+            throw new Exception("Cannot unfollow yourself");
         }
     }
 

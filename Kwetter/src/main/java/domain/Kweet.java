@@ -54,16 +54,24 @@ public class Kweet implements Comparable<Kweet> {
     private List<User> mentions;
     private List<Hashtag> hashtags;
 
-    public Kweet(Long id, String message, Date date, User user) {
+    public Kweet(Long id, String message, User user) {
         this.id = id;
         this.message = message;
-        this.date = date;
+        this.date = new Date();
         this.user = user;
         this.likedAccounts = new ArrayList<>();
         this.mentions = new ArrayList<>();
         this.hashtags = new ArrayList<>();
     }
-
+    
+    public Kweet(String message, User user) {
+        this.message = message;
+        this.user = user;
+        this.date = new Date();
+        this.likedAccounts = new ArrayList<>();
+        this.mentions = new ArrayList<>();
+        this.hashtags = new ArrayList<>();
+    }
     public Long getId() {
         return id;
     }
