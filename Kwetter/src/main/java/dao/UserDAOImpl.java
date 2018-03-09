@@ -47,30 +47,12 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void EditUsername(User user) {
+    public void EditUser(User user) {
         for(User u : users){
             if(u.getID() == user.getID()){
                 u.setUsername(user.getUsername());
             }
         }
-    }
-
-    @Override
-    public void AddFollowing(User user, User userFollowing) {
-        for(User u : users){
-            if(u.getID() == user.getID()){
-                u.addFollowing(userFollowing);
-            }
-        }
-    }
-
-    @Override
-    public void RemoveFollowing(User user, User userUnfollowing) {
-        for(User u : users){
-            if(u.getID() == user.getID()){
-                u.removeFollowing(userUnfollowing);
-            }
-        }    
     }
 
     @Override
@@ -81,13 +63,5 @@ public class UserDAOImpl implements UserDAO{
             }
         }
         return null;
-    }
-
-    @Override
-    public boolean login(String username, String password) {
-        if(GetUserByUsername(username) != null){
-            return GetUserByUsername(username).getPassword().equals(password);
-        }
-        return false;
     }
 }
