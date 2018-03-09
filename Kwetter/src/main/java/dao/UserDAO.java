@@ -13,12 +13,20 @@ import java.util.List;
  *
  * @author Ronal
  */
-public interface UserDAO {  
-    
+public interface UserDAO {
+
     public List<User> GetAllUsers();
-    public User GetUserById (long id);
+
+    public User GetUserById(long id);
+
     public User GetUserByUsername(String username);
+
     public void AddUser(User user);
-    public void DeleteUser (User user);
-    public void EditUser (User user);   
+
+    public void DeleteUser(User user);
+
+    void followUser(User user, User otherUser) throws Exception;
+
+    void unfollowUser(User user, User otherUser) throws Exception;
+
 }

@@ -69,17 +69,3 @@ public class UserServiceImpl implements UserService {
 }
 
 
-//    public void followUser(User user, User otherUser) {
-//        if(user!=null && otherUser !=null){
-//            user.addFollowing(otherUser);
-//            otherUser.addFollower(user);
-//        }
-//    }
-//
-//    @Override
-//    public void unfollowUser(User user, User otherUser) {
-//        if(user!=null && otherUser !=null){
-//            user.removeFollowing(otherUser);
-//            otherUser.removeFollower(user);
-//        } 
-//    }

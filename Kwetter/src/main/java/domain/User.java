@@ -64,11 +64,11 @@ public class User {
         this.username = username;
         this.password = password;
         this.profilePhoto = profilePhoto;
-        this.followersAccounts = new ArrayList<>();
-        this.followersAccounts = new ArrayList<>();
-        this.kweets = new ArrayList<>();
-        this.mentions = new ArrayList<>();
-
+    }
+    
+    public User(String username, String password){
+        this.username=username;
+        this.password=password;
     }
 
     public Long getID() {

@@ -13,13 +13,15 @@ import java.util.List;
  *
  * @author Ronal
  */
-public class UserDAOImpl implements UserDAO{
+public class UserDAOImpl implements UserDAO {
+
     List<User> users;
-    
-    public UserDAOImpl(){
+
+    public UserDAOImpl() {
         users = new ArrayList<User>();
-        
+
     }
+
     @Override
     public List<User> GetAllUsers() {
         return this.users;
@@ -27,9 +29,8 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public User GetUserById(long id) {
-        for(User user : users){
-            if(user.getID() == id)
-            {
+        for (User user : users) {
+            if (user.getID() == id) {
                 return user;
             }
         }
@@ -47,18 +48,25 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void EditUser(User user) {
-        for(User u : users){
-            if(u.getID() == user.getID()){
-                u.setUsername(user.getUsername());
-            }
+    public void followUser(User user, User otherUser) {
+        if (user != null && otherUser != null) {
+            user.addFollowing(otherUser);
+            otherUser.addFollower(user);
+        }
+    }
+
+    @Override
+    public void unfollowUser(User user, User otherUser) {
+        if (user != null && otherUser != null) {
+            user.removeFollowing(otherUser);
+            otherUser.removeFollower(user);
         }
     }
 
     @Override
     public User GetUserByUsername(String username) {
-        for(User u : users){
-            if(u.getUsername() == username){
+        for (User u : users) {
+            if (u.getUsername() == username) {
                 return u;
             }
         }
