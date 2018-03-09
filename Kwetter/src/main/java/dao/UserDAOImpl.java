@@ -48,22 +48,6 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void followUser(User user, User otherUser) {
-        if (user != null && otherUser != null) {
-            user.addFollowing(otherUser);
-            otherUser.addFollower(user);
-        }
-    }
-
-    @Override
-    public void unfollowUser(User user, User otherUser) {
-        if (user != null && otherUser != null) {
-            user.removeFollowing(otherUser);
-            otherUser.removeFollower(user);
-        }
-    }
-
-    @Override
     public User GetUserByUsername(String username) {
         for (User u : users) {
             if (u.getUsername() == username) {
@@ -71,5 +55,17 @@ public class UserDAOImpl implements UserDAO {
             }
         }
         return null;
+    }
+    
+    @Override
+    public void EditUser(User user){
+        for(User u : users){
+            if(user.getID() == u.getID()){
+                u = user;
+                //Remove & Add to collection might be cleaner
+                //users.remove(u);
+                //users.add(user);
+            }
+        }
     }
 }

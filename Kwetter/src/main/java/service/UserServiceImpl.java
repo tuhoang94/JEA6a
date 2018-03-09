@@ -50,8 +50,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void followUser(User user, User otherUser) throws Exception {
+
         if (user != otherUser) {
-            this.userDAO.followUser(user, otherUser);
+            user.addFollowing(otherUser);
+            otherUser.addFollower(user);
+
+            this.userDAO.EditUser(user);
+            this.userDAO.EditUser(otherUser);
         } else {
             throw new Exception("Cannot follow yourself");
         }
@@ -60,12 +65,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void unfollowUser(User user, User otherUser) throws Exception {
         if (user != otherUser) {
-            this.userDAO.unfollowUser(user, otherUser);
+            user.removeFollowing(otherUser);
+            otherUser.removeFollower(user);
+            
+            this.userDAO.EditUser(user);
+            this.userDAO.EditUser(otherUser);
         } else {
             throw new Exception("Cannot unfollow yourself");
         }
     }
 
 }
-
-

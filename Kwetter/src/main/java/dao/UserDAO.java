@@ -24,9 +24,7 @@ public interface UserDAO {
     public void AddUser(User user);
 
     public void DeleteUser(User user);
-
-    void followUser(User user, User otherUser) throws Exception;
-
-    void unfollowUser(User user, User otherUser) throws Exception;
+    
+    void EditUser(User user);
 
 }
