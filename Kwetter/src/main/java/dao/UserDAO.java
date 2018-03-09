@@ -19,9 +19,6 @@ public interface UserDAO {
     public User GetUserById (long id);
     public User GetUserByUsername(String username);
     public void AddUser(User user);
-    public boolean login(String username, String password);
     public void DeleteUser (User user);
-    public void EditUsername (User user);   
-    public void followUser (User user, User otherUser);
-    public void unfollowUser(User user, User otherUser);
+    public void EditUser (User user);   
 }

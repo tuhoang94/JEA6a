@@ -7,24 +7,56 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
 /**
  *
  * @author Ronal
  */
+@Entity
+@Table(name = "user")
+@NamedQueries({
+    @NamedQuery(
+            name = "User.findAll",
+            query = "SELECT u FROM User u"
+    )
+    ,
+        @NamedQuery(
+            name = "User.findByName",
+            query = "SELECT u from User u WHERE u.username = :username"
+    )
+    ,
+        
+        @NamedQuery(
+            name = "User.findByID",
+            query = "SELECT u from User u WHERE u.id = :id"
+    )
+    ,
+        @NamedQuery(
+            name = "User.findAllByUsername",
+            query = "SELECT u FROM User u WHERE u.username like :name"
+    )
+})
 public class User {
 
+    @Id
+    @Column(name = "id")
     private Long id;
+
     private Role role;
+    @Column(name = "username")
     private String username;
+    @Column(name = "password")
     private String password;
     private Page pageInfo;
 
+    @Column(name = "profilephoto")
     private String profilePhoto;
-    private List<User> followingAccounts;
-    private List<User> followersAccounts;
-    private List<Kweet> kweets;
-    private List<Kweet> mentions;
+    private List<User> followingAccounts = new ArrayList<>();
+    private List<User> followersAccounts = new ArrayList<>();
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)
+    private List<Kweet> kweets = new ArrayList<>();
+    private List<Kweet> mentions = new ArrayList<>();
 
     public User(Long id, Role role, String username, String password, String profilePhoto) {
         this.id = id;
@@ -37,15 +69,6 @@ public class User {
         this.kweets = new ArrayList<>();
         this.mentions = new ArrayList<>();
 
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-        this.followersAccounts = new ArrayList<>();
-        this.followersAccounts = new ArrayList<>();
-        this.kweets = new ArrayList<>();
-        this.mentions = new ArrayList<>();
     }
 
     public Long getID() {

@@ -10,4 +10,4 @@ domain\User.class
 service\KweetService.class
 dao\KweetDAOImpl.class
 dao\UserDAOImpl.class
-service\UserServiceImpl.class
+dao\KweetDAO_CollectionController.class

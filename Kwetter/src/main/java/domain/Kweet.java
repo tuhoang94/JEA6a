@@ -8,6 +8,31 @@ package domain;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.*;
+
+@Entity
+@Table(name = "kweet")
+@NamedQueries({
+    @NamedQuery(
+            name = "Kweet.findAll",
+            query = "SELECT k FROM Kweet k"
+    )
+    ,
+        @NamedQuery(
+            name = "Kweet.findByID",
+            query = "SELECT k FROM Kweet k WHERE k.id = :id"
+    )
+    ,
+        @NamedQuery(
+            name = "Kweet.findAllReplies",
+            query = "SELECT k FROM Kweet k WHERE k.replyTo = :kweet"
+    )
+    ,
+        @NamedQuery(
+            name = "Kweet.findAllByBody",
+            query = "SELECT k FROM Kweet k WHERE k.body like :body"
+    )
+})
 
 /**
  *
@@ -15,9 +40,15 @@ import java.util.List;
  */
 public class Kweet implements Comparable<Kweet> {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "message")
     private String message;
+    @Column(name = "date")
     private Date date;
+    @Column(name = "location")
     private User user;
     private List<User> likedAccounts;
     private List<User> mentions;
