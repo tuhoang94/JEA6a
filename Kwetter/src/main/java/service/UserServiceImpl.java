@@ -19,13 +19,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(User user) {
-        //TODO: Check if username exist in userdao
-        userDAO.AddUser(user);
+        if (userDAO.GetUserByUsername(user.getUsername()) != null) {
+            userDAO.AddUser(user);
+        }
     }
 
     @Override
     public void editUsername(String username) {
-        //TODO: Check if username exist in userdao 
+        if (userDAO.GetUserByUsername(username) != null) {
+            User user = userDAO.GetUserByUsername(username);
+            userDAO.EditUser(user);
+        }
     }
 
     @Override
@@ -67,7 +71,7 @@ public class UserServiceImpl implements UserService {
         if (user != otherUser) {
             user.removeFollowing(otherUser);
             otherUser.removeFollower(user);
-            
+
             this.userDAO.EditUser(user);
             this.userDAO.EditUser(otherUser);
         } else {
