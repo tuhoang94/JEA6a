@@ -70,16 +70,4 @@ public class UserDAOJpaController implements UserDAO, Serializable {
     public void EditUser(User user) {
         em.merge(user);
     }
-    
-
-    @Override
-    public void followUser(User user, User otherUser) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void unfollowUser(User user, User otherUser) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
