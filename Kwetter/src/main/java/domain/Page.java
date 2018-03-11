@@ -5,16 +5,29 @@
  */
 package domain;
 
+import javax.persistence.*;
+
 /**
  *
  * @author Ronal
  */
+@Table(name = "page")
+@Entity
 public class Page {
+
+    @Id
+    @Column(name = "pid")
     String id;
+    @Column(name = "bio")
     String bio;
+    @Column(name = "location")
     String location;
+    @Column(name = "website")
     String website;
+    @Column(name = "thema")
     String thema;
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "uid")
     User user;
 
     public Page(String id, String bio, String location, String website, String thema, User user) {
@@ -25,6 +38,5 @@ public class Page {
         this.thema = thema;
         this.user = user;
     }
-    
-    
+
 }
