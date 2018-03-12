@@ -5,18 +5,26 @@
  */
 package domain;
 
+import javax.persistence.*;
+
+import javax.persistence.Id;
+
 /**
  *
  * @author Ronal
  */
 public class Hashtag {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "hid")
     private long id;
+    @Column(name = "tag")
     private String tag;
-    
 
     public Hashtag(long id, String tag) {
         this.tag = tag;
-        this.id=id;
+        this.id = id;
     }
 
     public long getId() {
@@ -34,8 +42,5 @@ public class Hashtag {
     public void setTag(String tag) {
         this.tag = tag;
     }
-    
-    
-    
-    
+
 }

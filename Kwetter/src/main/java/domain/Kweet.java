@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 @Entity
 @Table(name = "kweet")
@@ -42,16 +43,53 @@ public class Kweet implements Comparable<Kweet> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "kid")
     private Long id;
     @Column(name = "message")
     private String message;
     @Column(name = "date")
     private Date date;
-    @Column(name = "owner")
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "owner")
     private User user;
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(
+            name = "kweet_likedAccounts",
+            joinColumns = @JoinColumn(
+                    name = "uid",
+                    referencedColumnName = "uid"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "kid",
+                    referencedColumnName = "kid"
+            )
+    )
     private List<User> likedAccounts;
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(
+            name = "kweet_MentionedAccounts",
+            joinColumns = @JoinColumn(
+                    name = "uid",
+                    referencedColumnName = "uid"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "kid",
+                    referencedColumnName = "kid"
+            )
+    )
     private List<User> mentions;
+        @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(
+            name = "Kweet_Hashtag",
+            joinColumns = @JoinColumn(
+                    name = "hid",
+                    referencedColumnName = "hid"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "kid",
+                    referencedColumnName = "kid"
+            )
+    )
     private List<Hashtag> hashtags;
 
     public Kweet(Long id, String message, User user) {
@@ -63,7 +101,7 @@ public class Kweet implements Comparable<Kweet> {
         this.mentions = new ArrayList<>();
         this.hashtags = new ArrayList<>();
     }
-    
+
     public Kweet(String message, User user) {
         this.message = message;
         this.user = user;
@@ -72,6 +110,7 @@ public class Kweet implements Comparable<Kweet> {
         this.mentions = new ArrayList<>();
         this.hashtags = new ArrayList<>();
     }
+
     public Long getId() {
         return id;
     }

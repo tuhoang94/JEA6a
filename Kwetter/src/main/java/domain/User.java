@@ -8,6 +8,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 /**
  *
@@ -29,31 +30,41 @@ import javax.persistence.*;
         
         @NamedQuery(
             name = "User.findByID",
-            query = "SELECT u from User u WHERE u.id = :id"
+            query = "SELECT u from User u WHERE u.uid = :uid"
     )
     ,
         @NamedQuery(
             name = "User.findAllByUsername",
-            query = "SELECT u FROM User u WHERE u.username like :name"
+            query = "SELECT u FROM User u WHERE u.username like :username"
     )
 })
 public class User {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "uid")
     private Long id;
-    
+
     @Enumerated(EnumType.STRING)
     private Role role;
     @Column(name = "username")
     private String username;
     @Column(name = "password")
     private String password;
-    @Column
+    @Column(name = "page")
     private Page pageInfo;
-
     @Column(name = "profilephoto")
     private String profilePhoto;
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(
+            name = "user_followsusers",
+            joinColumns = @JoinColumn(
+                    name = "user",
+                    referencedColumnName = "uid"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "followsuser",
+                    referencedColumnName = "uid"
+            )
+    )
     private List<User> followingAccounts = new ArrayList<>();
     private List<User> followersAccounts = new ArrayList<>();
     @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)
@@ -67,10 +78,10 @@ public class User {
         this.password = password;
         this.profilePhoto = profilePhoto;
     }
-    
-    public User(String username, String password){
-        this.username=username;
-        this.password=password;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public Long getID() {
