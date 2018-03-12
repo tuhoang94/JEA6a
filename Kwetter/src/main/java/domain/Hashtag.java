@@ -14,7 +14,7 @@ import javax.persistence.Id;
  * @author Ronal
  */
 @Entity
-@Table(name="hashtag")
+@Table(name = "hashtag")
 public class Hashtag {
 
     @Id
@@ -27,6 +27,10 @@ public class Hashtag {
     public Hashtag(long id, String tag) {
         this.tag = tag;
         this.id = id;
+    }
+
+    public Hashtag() {
+
     }
 
     public long getId() {

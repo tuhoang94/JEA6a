@@ -39,4 +39,8 @@ public class Page {
         this.user = user;
     }
 
+    public Page() {
+
+    }
+
 }
