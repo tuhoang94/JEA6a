@@ -12,28 +12,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "kweet")
-//@NamedQueries({
-//    @NamedQuery(
-//            name = "Kweet.findAll",
-//            query = "SELECT k FROM Kweet k"
-//    )
-//    ,
-//        @NamedQuery(
-//            name = "Kweet.findByID",
-//            query = "SELECT k FROM Kweet k WHERE k.id = :id"
-//    )
-//    ,
-//        @NamedQuery(
-//            name = "Kweet.findAllReplies",
-//            query = "SELECT k FROM Kweet k WHERE k.replyTo = :kweet"
-//    )
-//    ,
-//        @NamedQuery(
-//            name = "Kweet.findAllByBody",
-//            query = "SELECT k FROM Kweet k WHERE k.body like :body"
-//    )
-//})
-
 /**
  *
  * @author Ronal
@@ -77,7 +55,7 @@ public class Kweet implements Comparable<Kweet> {
             )
     )
     private List<User> mentions;
-        @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "Kweet_Hashtag",
             joinColumns = @JoinColumn(
@@ -91,14 +69,8 @@ public class Kweet implements Comparable<Kweet> {
     )
     private List<Hashtag> hashtags;
 
-    public Kweet(Long id, String message, User user) {
-        this.id = id;
-        this.message = message;
-        this.date = new Date();
-        this.user = user;
-        this.likedAccounts = new ArrayList<>();
-        this.mentions = new ArrayList<>();
-        this.hashtags = new ArrayList<>();
+    public Kweet() {
+
     }
 
     public Kweet(String message, User user) {
