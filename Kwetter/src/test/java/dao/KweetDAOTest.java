@@ -27,7 +27,7 @@ public class KweetDAOTest {
     Long kid = 456l;
     Date kd = new Date();
     User a = new User(aid, Role.USER, "aUsername", "aPassword", "aProfilePhoto");
-    Kweet k = new Kweet(kid, "test123", kd, a);
+    Kweet k = new Kweet(kid, "test123", a);
     Long cid = 888l;
     User c = new User(cid, Role.USER, "cUsername", "cPassword", "cProfilePhoto");
     KweetDAO kdao;

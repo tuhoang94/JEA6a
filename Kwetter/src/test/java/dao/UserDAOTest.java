@@ -100,7 +100,7 @@ public class UserDAOTest {
      */
     @Test
     public void testAddFollowing() {
-        udao.AddFollowing(a, b);
+      //  udao.AddFollowing(a, b);
         a.addFollowing(b);
 
     }
@@ -110,7 +110,7 @@ public class UserDAOTest {
      */
     @Test
     public void testRemoveFollowing() {
-        udao.RemoveFollowing(a, b);
+       // udao.RemoveFollowing(a, b);
         a.removeFollowing(b);
         assertEquals(a.getFollowing().size(), 0);
 

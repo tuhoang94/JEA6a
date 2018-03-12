@@ -17,7 +17,7 @@ public class Page {
 
     @Id
     @Column(name = "pid")
-    String id;
+    Long id;
     @Column(name = "bio")
     String bio;
     @Column(name = "location")
@@ -30,7 +30,7 @@ public class Page {
     @JoinColumn(name = "uid")
     User user;
 
-    public Page(String id, String bio, String location, String website, String thema, User user) {
+    public Page(Long id, String bio, String location, String website, String thema, User user) {
         this.id = id;
         this.bio = bio;
         this.location = location;

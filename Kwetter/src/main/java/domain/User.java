@@ -8,7 +8,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 /**
  *

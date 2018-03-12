@@ -29,13 +29,13 @@ public class UserTest {
     User c = new User(cid, Role.USER, "cUsername", "cPassword", "cProfilePhoto");
     Long kid = 555l;
     Date kd = new Date();
-    Kweet k = new Kweet(kid, "test123", kd, a);
+    Kweet k = new Kweet(kid, "test123", a);
     Long oid = 555l;
     Date od = new Date();
-    Kweet o = new Kweet(oid, "kkkkaaaalll", od, c);
+    Kweet o = new Kweet(oid, "kkkkaaaalll", c);
     Long wid = 555l;
     Date wd = new Date();
-    Kweet w = new Kweet(wid, "iiiooopp", wd, c);
+    Kweet w = new Kweet(wid, "iiiooopp", c);
 
     public UserTest() {
     }
@@ -144,7 +144,7 @@ public class UserTest {
      */
     @Test
     public void testSetPage() {
-        Page p = new Page("pBio", "pLocation", "pWebsite", "pThema", a);
+        Page p = new Page(123l, "pBio", "pLocation", "pWebsite", "pThema", a);
         a.setPage(p);
         assertEquals(a.getPage().bio, "pBio");
     }
@@ -193,7 +193,7 @@ public class UserTest {
     public void testCreateKweet() {
         Long uid = 555l;
         Date ud = new Date();
-        Kweet u = new Kweet(uid, "test123", ud, a);
+        Kweet u = new Kweet(uid, "test123", a);
         a.createKweet(u);
         assertEquals(a.getKweets().size(), 2);
     }
