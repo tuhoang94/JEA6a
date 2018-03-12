@@ -20,32 +20,34 @@ import static org.junit.Assert.*;
  * @author Ronal
  */
 public class test {
+
     UserDAOJpaController dao = new UserDAOJpaController();
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("kwetter");
-   private EntityManager em;
+    private EntityManager em;
+
     public test() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
 
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-                try{
+        try {
             em = emf.createEntityManager();
             dao.setEm(em);
 
-        }catch(Exception ex){
-            
+        } catch (Exception ex) {
+
         }
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -55,21 +57,29 @@ public class test {
     //
     // @Test
     // public void hello() {}
-    
-        @Test
+    @Test
     public void testAddUserGetAllUsers() {
-    String aPF = "ProfilePhoto1";
-    Long aID = 123l;
-    String aName = "Jaap";
-    String aPsswd = "abcd";
-    Role aRole = Role.USER;
-    User a = new User(aID, aRole, aName, aPsswd, aPF);
-    em.getTransaction().begin();
-    dao.AddUser(a);
-    em.getTransaction().commit();
-    assertEquals(dao.GetAllUsers().size(), 1);
-            
+        try {
+            String aPF = "ProfilePhoto1";
+            Long aID = 123l;
+            String aName = "Jaap";
+            String aPsswd = "abcd";
+            Role aRole = Role.USER;
+            User a = new User(aID, aRole, aName, aPsswd, aPF);
+            em.getTransaction().begin();
+            dao.AddUser(a);
+            em.getTransaction().commit();
+            assertEquals(dao.GetAllUsers().size(), 1);
 
+        }
+        catch(Exception ex)
+        {
+            
+        }
+        finally
+        {
+            em.close();
+        }
 
     }
 }

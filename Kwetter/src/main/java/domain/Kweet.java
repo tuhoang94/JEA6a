@@ -12,27 +12,27 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "kweet")
-@NamedQueries({
-    @NamedQuery(
-            name = "Kweet.findAll",
-            query = "SELECT k FROM Kweet k"
-    )
-    ,
-        @NamedQuery(
-            name = "Kweet.findByID",
-            query = "SELECT k FROM Kweet k WHERE k.id = :id"
-    )
-    ,
-        @NamedQuery(
-            name = "Kweet.findAllReplies",
-            query = "SELECT k FROM Kweet k WHERE k.replyTo = :kweet"
-    )
-    ,
-        @NamedQuery(
-            name = "Kweet.findAllByBody",
-            query = "SELECT k FROM Kweet k WHERE k.body like :body"
-    )
-})
+//@NamedQueries({
+//    @NamedQuery(
+//            name = "Kweet.findAll",
+//            query = "SELECT k FROM Kweet k"
+//    )
+//    ,
+//        @NamedQuery(
+//            name = "Kweet.findByID",
+//            query = "SELECT k FROM Kweet k WHERE k.id = :id"
+//    )
+//    ,
+//        @NamedQuery(
+//            name = "Kweet.findAllReplies",
+//            query = "SELECT k FROM Kweet k WHERE k.replyTo = :kweet"
+//    )
+//    ,
+//        @NamedQuery(
+//            name = "Kweet.findAllByBody",
+//            query = "SELECT k FROM Kweet k WHERE k.body like :body"
+//    )
+//})
 
 /**
  *

@@ -15,28 +15,28 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "user")
-@NamedQueries({
-    @NamedQuery(
-            name = "User.findAll",
-            query = "SELECT u FROM User u"
-    )
-    ,
-        @NamedQuery(
-            name = "User.findByName",
-            query = "SELECT u from User u WHERE u.username = :username"
-    )
-    ,
-        
-        @NamedQuery(
-            name = "User.findByID",
-            query = "SELECT u from User u WHERE u.uid = :uid"
-    )
-    ,
-        @NamedQuery(
-            name = "User.findAllByUsername",
-            query = "SELECT u FROM User u WHERE u.username like :username"
-    )
-})
+//@NamedQueries({
+//    @NamedQuery(
+//            name = "User.findAll",
+//            query = "SELECT u FROM User u"
+//    )
+//    ,
+//        @NamedQuery(
+//            name = "User.findByName",
+//            query = "SELECT u from User u WHERE u.username = :username"
+//    )
+//    ,
+//        
+//        @NamedQuery(
+//            name = "User.findByID",
+//            query = "SELECT u from User u WHERE u.uid = :uid"
+//    )
+//    ,
+//        @NamedQuery(
+//            name = "User.findAllByUsername",
+//            query = "SELECT u FROM User u WHERE u.username like :username"
+//    )
+//})
 public class User {
 
     @Id
@@ -49,7 +49,7 @@ public class User {
     private String username;
     @Column(name = "password")
     private String password;
-    @Column(name = "page")
+    @OneToOne (mappedBy = "user")
     private Page pageInfo;
     @Column(name = "profilephoto")
     private String profilePhoto;
@@ -65,9 +65,11 @@ public class User {
             )
     )
     private List<User> followingAccounts = new ArrayList<>();
+    @ManyToMany (mappedBy = "followingAccounts")
     private List<User> followersAccounts = new ArrayList<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Kweet> kweets = new ArrayList<>();
+    @ManyToMany (mappedBy = "mentions")
     private List<Kweet> mentions = new ArrayList<>();
 
     public User(Long id, Role role, String username, String password, String profilePhoto) {
