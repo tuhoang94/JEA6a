@@ -13,6 +13,8 @@ import javax.persistence.Id;
  *
  * @author Ronal
  */
+@Entity
+@Table(name="hashtag")
 public class Hashtag {
 
     @Id

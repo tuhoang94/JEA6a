@@ -8,7 +8,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 /**
  *
@@ -67,7 +66,7 @@ public class User {
     )
     private List<User> followingAccounts = new ArrayList<>();
     private List<User> followersAccounts = new ArrayList<>();
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Kweet> kweets = new ArrayList<>();
     private List<Kweet> mentions = new ArrayList<>();
 

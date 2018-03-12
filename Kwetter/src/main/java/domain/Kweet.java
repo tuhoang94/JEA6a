@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 @Entity
 @Table(name = "kweet")
@@ -56,12 +55,12 @@ public class Kweet implements Comparable<Kweet> {
     @JoinTable(
             name = "kweet_likedAccounts",
             joinColumns = @JoinColumn(
-                    name = "uid",
-                    referencedColumnName = "uid"
+                    name = "kweet_id",
+                    referencedColumnName = "kid"
             ),
             inverseJoinColumns = @JoinColumn(
-                    name = "kid",
-                    referencedColumnName = "kid"
+                    name = "user_id",
+                    referencedColumnName = "uid"
             )
     )
     private List<User> likedAccounts;
@@ -69,12 +68,12 @@ public class Kweet implements Comparable<Kweet> {
     @JoinTable(
             name = "kweet_MentionedAccounts",
             joinColumns = @JoinColumn(
-                    name = "uid",
-                    referencedColumnName = "uid"
+                    name = "kweet_id",
+                    referencedColumnName = "kid"
             ),
             inverseJoinColumns = @JoinColumn(
-                    name = "kid",
-                    referencedColumnName = "kid"
+                    name = "user_id",
+                    referencedColumnName = "uid"
             )
     )
     private List<User> mentions;
@@ -82,12 +81,12 @@ public class Kweet implements Comparable<Kweet> {
     @JoinTable(
             name = "Kweet_Hashtag",
             joinColumns = @JoinColumn(
-                    name = "hid",
-                    referencedColumnName = "hid"
+                    name = "kweet_id",
+                    referencedColumnName = "kid"
             ),
             inverseJoinColumns = @JoinColumn(
-                    name = "kid",
-                    referencedColumnName = "kid"
+                    name = "hastag_id",
+                    referencedColumnName = "hid"
             )
     )
     private List<Hashtag> hashtags;

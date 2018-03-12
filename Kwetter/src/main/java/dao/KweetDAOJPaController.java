@@ -16,7 +16,7 @@ import javax.persistence.*;
  */
 public class KweetDAOJPaController implements KweetDAO, Serializable {
 
-    @PersistenceContext(unitName = "KwetterPersUnit")
+    @PersistenceContext(unitName = "kwetter")
     private EntityManager em;
 
     public void setEm(EntityManager em) {

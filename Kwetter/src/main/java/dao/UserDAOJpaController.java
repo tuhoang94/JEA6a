@@ -8,15 +8,17 @@ package dao;
 import domain.User;
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.*;
 
 /**
  *
  * @author jeroe
  */
+@Stateless
 public class UserDAOJpaController implements UserDAO, Serializable {
 
-    @PersistenceContext(unitName = "KwetterPersUnit")
+    @PersistenceContext(unitName = "kwetter")
     private EntityManager em;
 
     public void setEm(EntityManager em) {
@@ -36,7 +38,7 @@ public class UserDAOJpaController implements UserDAO, Serializable {
 
     @Override
     public User GetUserById(long id) {
-       TypedQuery<User> query = em.createNamedQuery("User.findById", User.class)
+        TypedQuery<User> query = em.createNamedQuery("User.findById", User.class)
                 .setParameter("id", id);
         try {
             return query.getSingleResult();
@@ -58,7 +60,13 @@ public class UserDAOJpaController implements UserDAO, Serializable {
 
     @Override
     public void AddUser(User user) {
-        em.merge(user);
+        //em.merge(user);
+        em.getTransaction()
+                .begin();
+        em.persist(user);
+        em.getTransaction()
+                .commit();
+        em.close();
     }
 
     @Override
