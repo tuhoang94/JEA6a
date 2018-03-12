@@ -5,6 +5,7 @@
  */
 package dao;
 
+import domain.Kweet;
 import domain.Role;
 import domain.User;
 import javax.persistence.*;
@@ -21,7 +22,8 @@ import static org.junit.Assert.*;
  */
 public class test {
 
-    UserDAOJpaController dao = new UserDAOJpaController();
+    KweetDAOJPaController kdao = new KweetDAOJPaController();
+    UserDAOJpaController udao = new UserDAOJpaController();
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("kwetter");
     private EntityManager em;
 
@@ -41,7 +43,8 @@ public class test {
     public void setUp() {
         try {
             em = emf.createEntityManager();
-            dao.setEm(em);
+            udao.setEm(em);
+            kdao.setEm(em);
 
         } catch (Exception ex) {
 
@@ -65,20 +68,17 @@ public class test {
             String aName = "Jaap";
             String aPsswd = "abcd";
             Role aRole = Role.USER;
-            User a = new User(aID, aRole, aName, aPsswd, aPF);
-            em.getTransaction().begin();
-            dao.AddUser(a);
-            em.getTransaction().commit();
-            assertEquals(dao.GetAllUsers().size(), 1);
+            User a = new User(aRole, aName, aPsswd, aPF);
+            Kweet k = new Kweet("test123", a);
+            Kweet i = new Kweet();
+            i.setMessage("hallo");
+            kdao.AddKweet(k);
+            udao.AddUser(a);
+            kdao.AddKweet(i);
+            assertEquals(kdao.GetAllKweets().size(), 1);
 
-        }
-        catch(Exception ex)
-        {
-            
-        }
-        finally
-        {
-            em.close();
+        } catch (Exception ex) {
+
         }
 
     }

@@ -31,10 +31,10 @@ public class KweetDAOTest {
     Long aid = 123l;
     Long kid = 456l;
     Date kd = new Date();
-    User a = new User(aid, Role.USER, "aUsername", "aPassword", "aProfilePhoto");
+    User a = new User(Role.USER, "aUsername", "aPassword", "aProfilePhoto");
     Kweet k = new Kweet("test123", a);
     Long cid = 888l;
-    User c = new User(cid, Role.USER, "cUsername", "cPassword", "cProfilePhoto");
+    User c = new User(Role.USER, "cUsername", "cPassword", "cProfilePhoto");
 
     public KweetDAOTest() {
     }
@@ -51,7 +51,7 @@ public class KweetDAOTest {
     public void setUp() {
         try {
             em = emf.createEntityManager();
-            dao.setEm(em);
+           // dao.setEm(em);
 
         } catch (Exception ex) {
 
@@ -64,8 +64,10 @@ public class KweetDAOTest {
 
     @Test
     public void testAddKweet() {
+
         dao.AddKweet(k);
         assertEquals(dao.GetAllKweets().size(), 1);
+
     }
 
     /**

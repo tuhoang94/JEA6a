@@ -35,7 +35,7 @@ import javax.persistence.*;
 
 public class User {
 
-    @Id
+    @Id @GeneratedValue
     @Column(name = "uid")
     private Long id;
 

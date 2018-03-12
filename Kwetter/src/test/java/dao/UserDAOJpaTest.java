@@ -87,7 +87,7 @@ public class UserDAOJpaTest {
             String aName = "Jaap";
             String aPsswd = "abcd";
             Role aRole = Role.USER;
-            User a = new User(aID, aRole, aName, aPsswd, aPF);
+            User a = new User(aRole, aName, aPsswd, aPF);
             em.getTransaction().begin();
             dao.AddUser(a);
             em.getTransaction().commit();

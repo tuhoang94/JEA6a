@@ -19,7 +19,7 @@ import javax.persistence.*;
 public class Kweet implements Comparable<Kweet> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "kid")
     private Long id;
     @Column(name = "message")
@@ -76,7 +76,7 @@ public class Kweet implements Comparable<Kweet> {
     public Kweet(String message, User user) {
         this.message = message;
         this.user = user;
-        this.date = new Date();
+//        this.date = new Date();
         this.likedAccounts = new ArrayList<>();
         this.mentions = new ArrayList<>();
         this.hashtags = new ArrayList<>();
