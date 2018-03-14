@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity
 public class Page {
 
-    @Id
+    @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "pid")
     Long id;
     @Column(name = "bio")

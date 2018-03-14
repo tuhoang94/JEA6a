@@ -31,10 +31,10 @@ public class KweetDAOTest {
     Long aid = 123l;
     Long kid = 456l;
     Date kd = new Date();
-    User a = new User(Role.USER, "aUsername", "aPassword", "aProfilePhoto");
-    Kweet k = new Kweet("test123", a);
+    User a = new User(aid, Role.USER, "aUsername", "aPassword", "aProfilePhoto");
+    Kweet k = new Kweet(kid, "test123", a);
     Long cid = 888l;
-    User c = new User(Role.USER, "cUsername", "cPassword", "cProfilePhoto");
+    User c = new User(cid, Role.USER, "cUsername", "cPassword", "cProfilePhoto");
 
     public KweetDAOTest() {
     }
@@ -65,9 +65,8 @@ public class KweetDAOTest {
     @Test
     public void testAddKweet() {
 
-        em.getTransaction().begin();
         dao.AddKweet(k);
-        em.getTransaction().commit();
+        //em.getTransaction().commit();
         assertEquals(dao.GetAllKweets().size(), 1);
 
     }
@@ -77,7 +76,9 @@ public class KweetDAOTest {
      */
     @Test
     public void testGetKweetById() {
-        assertEquals(dao.GetKweetById(kid).getId(), k.getId());
+        
+        Kweet h = dao.GetKweetById(k.getId());
+        assertEquals(h.getId(), k.getId());
     }
 
     /**
@@ -92,28 +93,5 @@ public class KweetDAOTest {
     /**
      * Test of AddKweet method, of class KweetDAO.
      */
-    public class KweetDAOImpl {
-
-        Long aid = 123l;
-        Long kid = 456l;
-        Date kd = new Date();
-        User a = new User(Role.USER, "aUsername", "aPassword", "aProfilePhoto");
-        Kweet k = new Kweet("test123", a);
-        Long cid = 888l;
-        User c = new User(Role.USER, "cUsername", "cPassword", "cProfilePhoto");
-
-        public List<Kweet> GetAllKweets() {
-            return null;
-        }
-
-        public Kweet GetKweetById(int id) {
-            return null;
-        }
-
-        public void DeleteKweet(Kweet kweet) {
-        }
-
-        public void AddKweet(Kweet kweet) {
-        }
-    }
+  
 }

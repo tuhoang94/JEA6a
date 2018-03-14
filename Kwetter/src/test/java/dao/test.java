@@ -70,28 +70,17 @@ public class test {
             String aPsswd = "abcd";
             Role aRole = Role.USER;
             User a = new User(aRole, aName, aPsswd, aPF);
-            Kweet k = new Kweet("test123", a);
+            Kweet k = new Kweet(1234l, "test123", a);
             Kweet i = new Kweet();
             i.setMessage("hallo");
-            em.getTransaction().begin();
+          // em.getTransaction().begin();
 
        //     udao.AddUser(a);
 //            em.getTransaction().commit();
 //            em.getTransaction().begin();
             kdao.AddKweet(k);
-            kdao.AddKweet(k);
-            
-            try
-            {
-            em.getTransaction().commit();
-            }
-            catch(Exception ex)
-            {
-                s = ex.toString();
-            }
-
-            System.out.println(kdao.GetAllKweets().get(0).toString());
-           assertEquals(kdao.GetAllKweets().size(), 1);
+            Kweet h = kdao.GetKweetById(k.getId());
+            assertEquals(h.getId(), k.getId());
 
         } catch (Exception ex) {
 

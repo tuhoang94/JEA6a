@@ -35,7 +35,7 @@ import javax.persistence.*;
 
 public class User {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "uid")
     private Long id;
 
@@ -72,7 +72,15 @@ public class User {
         
     }
     
-    public User(Role role, String username, String password, String profilePhoto) {
+    public User(Long id, Role role, String username, String password, String profilePhoto) {
+        this.id = id;
+        this.role = role;
+        this.username = username;
+        this.password = password;
+        this.profilePhoto = profilePhoto;
+    }
+    
+        public User(Role role, String username, String password, String profilePhoto) {
         this.role = role;
         this.username = username;
         this.password = password;

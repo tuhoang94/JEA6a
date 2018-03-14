@@ -24,10 +24,10 @@ public class KweetTest {
     Long aid = 123l;
     Long kid = 456l;
     Date kd = new Date();
-    User a = new User(Role.USER, "aUsername", "aPassword", "aProfilePhoto");
-    Kweet k = new Kweet("test123", a);
+    User a = new User(aid, Role.USER, "aUsername", "aPassword", "aProfilePhoto");
+    Kweet k = new Kweet(kid, "test123", a);
     Long cid = 888l;
-    User c = new User(Role.USER, "cUsername", "cPassword", "cProfilePhoto");
+    User c = new User(cid, Role.USER, "cUsername", "cPassword", "cProfilePhoto");
 
     public KweetTest() {
     }
@@ -115,7 +115,7 @@ public class KweetTest {
     @Test
     public void testSetUser() {
         Long bid = 666l;
-        User b = new User(Role.USER, "bUsername", "bPassword", "bProfilePhoto");
+        User b = new User(bid, Role.USER, "bUsername", "bPassword", "bProfilePhoto");
         k.setUser(b);
         assertEquals(k.getUser().getID(), bid);
     }
@@ -191,7 +191,7 @@ public class KweetTest {
     @Test
     public void testAddMention() {
         Long did = 889l;
-        User d = new User(Role.USER, "dUsername", "dPassword", "dProfilePhoto");
+        User d = new User(did, Role.USER, "dUsername", "dPassword", "dProfilePhoto");
         k.addMention(d);
         assertEquals(k.getMentions().size(), 2);
     }

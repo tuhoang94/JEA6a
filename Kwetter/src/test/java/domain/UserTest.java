@@ -22,20 +22,20 @@ import static org.junit.Assert.*;
 public class UserTest {
 
     Long aid = 123l;
-    User a = new User(Role.BANNED, "aUsername", "aPassword", "aProfilePhoto");
+    User a = new User(aid, Role.BANNED, "aUsername", "aPassword", "aProfilePhoto");
     Long bid = 1234l;
-    User b = new User(Role.USER, "bUsername", "bPassword", "bProfilePhoto");
+    User b = new User(bid, Role.USER, "bUsername", "bPassword", "bProfilePhoto");
     Long cid = 444l;
-    User c = new User(Role.USER, "cUsername", "cPassword", "cProfilePhoto");
+    User c = new User(cid, Role.USER, "cUsername", "cPassword", "cProfilePhoto");
     Long kid = 555l;
     Date kd = new Date();
-    Kweet k = new Kweet("test123", a);
+    Kweet k = new Kweet(kid, "test123", a);
     Long oid = 555l;
     Date od = new Date();
-    Kweet o = new Kweet("kkkkaaaalll", c);
+    Kweet o = new Kweet(oid, "kkkkaaaalll", c);
     Long wid = 555l;
     Date wd = new Date();
-    Kweet w = new Kweet("iiiooopp", c);
+    Kweet w = new Kweet(wid, "iiiooopp", c);
 
     public UserTest() {
     }
@@ -193,7 +193,7 @@ public class UserTest {
     public void testCreateKweet() {
         Long uid = 555l;
         Date ud = new Date();
-        Kweet u = new Kweet("test123", a);
+        Kweet u = new Kweet(uid, "test123", a);
         a.createKweet(u);
         assertEquals(a.getKweets().size(), 2);
     }
