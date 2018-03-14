@@ -22,10 +22,11 @@ import static org.junit.Assert.*;
  */
 public class test {
 
-    KweetDAOJPaController kdao = new KweetDAOJPaController();
-    UserDAOJpaController udao = new UserDAOJpaController();
+    private KweetDAOJPaController kdao = new KweetDAOJPaController();
+ //   private UserDAOJpaController udao = new UserDAOJpaController();
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("kwetter");
     private EntityManager em;
+    private String s;
 
     public test() {
     }
@@ -43,7 +44,7 @@ public class test {
     public void setUp() {
         try {
             em = emf.createEntityManager();
-            udao.setEm(em);
+       //     udao.setEm(em);
             kdao.setEm(em);
 
         } catch (Exception ex) {
@@ -73,10 +74,24 @@ public class test {
             Kweet i = new Kweet();
             i.setMessage("hallo");
             em.getTransaction().begin();
+
+       //     udao.AddUser(a);
+//            em.getTransaction().commit();
+//            em.getTransaction().begin();
             kdao.AddKweet(k);
-            udao.AddUser(a);
+            kdao.AddKweet(k);
+            
+            try
+            {
             em.getTransaction().commit();
-            assertEquals(kdao.GetAllKweets().size(), 1);
+            }
+            catch(Exception ex)
+            {
+                s = ex.toString();
+            }
+
+            System.out.println(kdao.GetAllKweets().get(0).toString());
+           assertEquals(kdao.GetAllKweets().size(), 1);
 
         } catch (Exception ex) {
 

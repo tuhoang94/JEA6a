@@ -25,7 +25,6 @@ import static org.junit.Assert.*;
 public class KweetDAOTest {
 
     private KweetDAOJPaController dao = new KweetDAOJPaController();
-//    UserDAOJpaController udao = new UserDAOJpaController();
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("kwetter");
     private EntityManager em;
 
@@ -53,7 +52,6 @@ public class KweetDAOTest {
         try {
             em = emf.createEntityManager();
             dao.setEm(em);
-   //         udao.setEm(em);
 
         } catch (Exception ex) {
 
@@ -69,7 +67,6 @@ public class KweetDAOTest {
 
         em.getTransaction().begin();
         dao.AddKweet(k);
-        //udao.AddUser(a);
         em.getTransaction().commit();
         assertEquals(dao.GetAllKweets().size(), 1);
 

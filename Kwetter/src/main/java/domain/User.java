@@ -66,7 +66,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Kweet> kweets = new ArrayList<>();
     @ManyToMany(mappedBy = "mentions")
-    private List<Kweet> mentions = new ArrayList<>();
+    private List<Kweet> mention = new ArrayList<>();
 
     public User(){
         
@@ -177,15 +177,15 @@ public class User {
     }
 
     public List<Kweet> getMentions() {
-        return mentions;
+        return mention;
     }
 
-    public void setMentions(List<Kweet> mentions) {
-        this.mentions = mentions;
+    public void setMentions(List<Kweet> mention) {
+        this.mention = mention;
     }
 
     public void addMention(Kweet k) {
-        this.mentions.add(k);
+        this.mention.add(k);
     }
 
 }

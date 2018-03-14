@@ -51,29 +51,19 @@ public class KweetDAOJPaController implements KweetDAO, Serializable {
     
     @Override
     public void DeleteKweet(Kweet kweet) {
-        try {
-            em.getTransaction().begin();
-            em.remove(kweet);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            
-        } finally {
-            em.close();
-        }
+
+        em.remove(kweet);
     }
     
     @Override
     public void AddKweet(Kweet kweet) {
+        try{
               em.merge(kweet);
-//        try {
-//            em.getTransaction().begin();
-//            em.persist(kweet);
-//            em.getTransaction().commit();
-//        } catch (Exception ex) {
-//            s = ex.toString();
-//        } finally {
-//           // em.close();
-//        }
+        }
+        catch(Exception ex)
+        {
+            s = ex.toString();
+        }
     }
     
     @Override

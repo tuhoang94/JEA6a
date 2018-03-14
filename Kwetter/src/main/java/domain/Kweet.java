@@ -26,10 +26,10 @@ public class Kweet implements Comparable<Kweet> {
     private String message;
     @Column(name = "date")
     private Date date;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "owner")
     private User user;
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "kweet_likedAccounts",
             joinColumns = @JoinColumn(
@@ -42,7 +42,7 @@ public class Kweet implements Comparable<Kweet> {
             )
     )
     private List<User> likedAccounts;
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "kweet_MentionedAccounts",
             joinColumns = @JoinColumn(
@@ -55,7 +55,7 @@ public class Kweet implements Comparable<Kweet> {
             )
     )
     private List<User> mentions;
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "Kweet_Hashtag",
             joinColumns = @JoinColumn(
@@ -76,7 +76,7 @@ public class Kweet implements Comparable<Kweet> {
     public Kweet(String message, User user) {
         this.message = message;
         this.user = user;
-//        this.date = new Date();
+        this.date = new Date();
         this.likedAccounts = new ArrayList<>();
         this.mentions = new ArrayList<>();
         this.hashtags = new ArrayList<>();
