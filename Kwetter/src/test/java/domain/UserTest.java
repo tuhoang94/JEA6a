@@ -22,11 +22,11 @@ import static org.junit.Assert.*;
 public class UserTest {
 
     Long aid = 123l;
-    User a = new User(aid, Role.BANNED, "aUsername", "aPassword", "aProfilePhoto");
+    User a = new User(Role.BANNED, "aUsername", "aPassword", "aProfilePhoto");
     Long bid = 1234l;
-    User b = new User(bid, Role.USER, "bUsername", "bPassword", "bProfilePhoto");
+    User b = new User(Role.USER, "bUsername", "bPassword", "bProfilePhoto");
     Long cid = 444l;
-    User c = new User(cid, Role.USER, "cUsername", "cPassword", "cProfilePhoto");
+    User c = new User(Role.USER, "cUsername", "cPassword", "cProfilePhoto");
     Long kid = 555l;
     Date kd = new Date();
     Kweet k = new Kweet("test123", a);

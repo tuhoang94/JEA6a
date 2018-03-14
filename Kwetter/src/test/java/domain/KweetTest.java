@@ -191,7 +191,7 @@ public class KweetTest {
     @Test
     public void testAddMention() {
         Long did = 889l;
-        User d = new User(did, Role.USER, "dUsername", "dPassword", "dProfilePhoto");
+        User d = new User(Role.USER, "dUsername", "dPassword", "dProfilePhoto");
         k.addMention(d);
         assertEquals(k.getMentions().size(), 2);
     }

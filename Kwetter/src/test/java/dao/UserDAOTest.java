@@ -28,28 +28,28 @@ public class UserDAOTest {
     String aName = "Jaap";
     String aPsswd = "abcd";
     Role aRole = Role.USER;
-    User a = new User(aID, aRole, aName, aPsswd, aPF);
+    User a = new User(aRole, aName, aPsswd, aPF);
 
     String bPF = "ProfilePhoto2";
     Long bID = 8879l;
     String bName = "Piet";
     String bPsswd = "1234";
     Role bRole = Role.USER;
-    User b = new User(bID, bRole, bName, bPsswd, bPF);
+    User b = new User(bRole, bName, bPsswd, bPF);
 
     String cPF = "ProfilePhoto3";
     Long cID = 877767l;
     String cName = "Karel";
     String cPsswd = "defg";
     Role cRole = Role.USER;
-    User c = new User(cID, cRole, cName, cPsswd, cPF);
+    User c = new User(cRole, cName, cPsswd, cPF);
 
     String dPF = "ProfilePhoto4";
     Long dID = 22343l;
     String dName = "Henk";
     String dPsswd = "678";
     Role dRole = Role.USER;
-    User d = new User(dID, dRole, dName, dPsswd, dPF);
+    User d = new User(dRole, dName, dPsswd, dPF);
     UserDAO udao = new UserDAOImpl();
 
     public UserDAOTest() {
