@@ -60,18 +60,7 @@ public class UserDAOJpaController implements UserDAO, Serializable {
 
     @Override
     public void AddUser(User user) {
-        //em.merge(user);
-        try {
-            em.getTransaction()
-                    .begin();
-            em.persist(user);
-            em.getTransaction()
-                    .commit();
-        } catch (Exception ex) {
-
-        } finally {
-        //    em.close();
-        }
+              em.merge(user);
     }
 
     @Override

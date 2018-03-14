@@ -77,12 +77,12 @@ public class UserDAOTest {
      */
     @Test
     public void testGetUserById() {
-        assertEquals(udao.GetUserById(aID).getID(), aID);
+        assertEquals(udao.GetUserById(aID).getID(), a.getID());
     }
 
     @Test
     public void testGetUserByName() {
-        assertEquals(udao.GetUserByUsername(aName).getID(), aID);
+        assertEquals(udao.GetUserByUsername(aName).getID(), a.getID());
     }
 
     /**
