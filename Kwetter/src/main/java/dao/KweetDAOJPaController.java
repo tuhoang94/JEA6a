@@ -64,7 +64,7 @@ public class KweetDAOJPaController implements KweetDAO, Serializable {
     
     @Override
     public void AddKweet(Kweet kweet) {
-              em.persist(kweet);
+              em.merge(kweet);
 //        try {
 //            em.getTransaction().begin();
 //            em.persist(kweet);

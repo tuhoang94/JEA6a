@@ -72,9 +72,10 @@ public class test {
             Kweet k = new Kweet("test123", a);
             Kweet i = new Kweet();
             i.setMessage("hallo");
+            em.getTransaction().begin();
             kdao.AddKweet(k);
             udao.AddUser(a);
-            kdao.AddKweet(i);
+            em.getTransaction().commit();
             assertEquals(kdao.GetAllKweets().size(), 1);
 
         } catch (Exception ex) {
