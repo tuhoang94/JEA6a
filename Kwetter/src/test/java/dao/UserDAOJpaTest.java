@@ -24,6 +24,12 @@ public class UserDAOJpaTest {
     UserDAOJpaController dao = new UserDAOJpaController();
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("kwetter");
     private EntityManager em;
+    private String aPF = "ProfilePhoto1";
+    private Long aID = 123l;
+    private String aName = "Jaap";
+    private String aPsswd = "abcd";
+    private Role aRole = Role.USER;
+    private User a = new User(aRole, aName, aPsswd, aPF);
 
     public UserDAOJpaTest() {
     }
@@ -51,58 +57,26 @@ public class UserDAOJpaTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-    @Test
-    public void testGetUserById(){
-                try {
-            this.testAddUser();
-            em.getTransaction().begin();
-           // dao.GetUserById(1);
-           // assertTrue(dao.GetAllUsers().);
-            em.getTransaction().commit();
-           
-
-        }
-        catch(Exception ex)
-        {
-            
-        }
-        finally
-        {
-            em.close();
-        }
-    }
-    
-    
-    
     @Test
     public void testAddUser() {
-        try {
-            String aPF = "ProfilePhoto1";
-            Long aID = 123l;
-            String aName = "Jaap";
-            String aPsswd = "abcd";
-            Role aRole = Role.USER;
-            User a = new User(aRole, aName, aPsswd, aPF);
-            em.getTransaction().begin();
-            dao.AddUser(a);
-            em.getTransaction().commit();
-            assertEquals(dao.GetAllUsers().size(), 1);
 
-        }
-        catch(Exception ex)
-        {
-            
-        }
-        finally
-        {
-            em.close();
-        }
+        dao.AddUser(a);
+        assertEquals(dao.GetAllUsers().size(), 1);
 
     }
 
+    @Test
+    public void editUser() {
+        a.setUsername("FransBauer");
+        dao.EditUser(a);
+        String s = a.getUsername();
+        assertEquals(dao.GetAllUsers().size(), 1);
+    }
+    
+
+//    @Test
+//    public void deleteUser() {
+//        dao.DeleteUser(a);
+//        assertEquals(dao.GetAllUsers().size(), 0);
+//    }
 }
