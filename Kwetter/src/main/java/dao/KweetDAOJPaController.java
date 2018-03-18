@@ -25,6 +25,10 @@ public class KweetDAOJPaController implements KweetDAO, Serializable {
     public void setEm(EntityManager em) {
         this.em = em;
     }
+    
+    public KweetDAOJPaController(){
+        
+    }
 
     @Override
     public List<Kweet> GetAllKweets() {

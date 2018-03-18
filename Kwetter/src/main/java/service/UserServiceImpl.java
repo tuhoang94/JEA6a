@@ -8,13 +8,16 @@ package service;
 import dao.UserDAO;
 import domain.User;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 /**
  *
  * @author Ronal
  */
+@Stateless
 public class UserServiceImpl implements UserService {
-
+    @Inject
     UserDAO userDAO;
 
     @Override

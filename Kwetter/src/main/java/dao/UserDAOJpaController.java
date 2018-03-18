@@ -24,6 +24,10 @@ public class UserDAOJpaController implements UserDAO, Serializable {
     public void setEm(EntityManager em) {
         this.em = em;
     }
+    
+    public UserDAOJpaController(){
+        
+    }
 
     @Override
     public List<User> GetAllUsers() {

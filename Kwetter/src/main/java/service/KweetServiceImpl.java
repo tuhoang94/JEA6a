@@ -10,15 +10,20 @@ import dao.UserDAO;
 import domain.Kweet;
 import domain.User;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 /**
  *
  * @author Ronal
  */
+@Stateless
 public class KweetServiceImpl implements KweetService{
 
+    @Inject
     private KweetDAO kweetDao;
     
+    @Inject
     private UserDAO userDao;
     
     private User loggedInUser;

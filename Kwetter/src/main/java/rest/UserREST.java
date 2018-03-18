@@ -19,14 +19,19 @@ import service.UserService;
  *
  * @author Ronal
  */
-@Path("/user")
+@Path("user")
 @Produces({MediaType.APPLICATION_JSON})
 @Stateless
 public class UserREST {
 
     @Inject
     UserService userService;
-
+    
+    @GET
+    @Path("add")
+    public String test(){
+        return "Üser API called test";
+    }
 
     @GET
     @Path("/get/")
@@ -78,7 +83,7 @@ public class UserREST {
         this.userService.followUser(user, otherUser);
     }
     
-        @POST
+    @POST
     @Path("/unfollow")
     @Produces({MediaType.APPLICATION_JSON})
     public void unfollowUser(@Context HttpServletResponse response, @PathParam("username") String username, @PathParam("otherUsername") String otherUsername) throws Exception{
