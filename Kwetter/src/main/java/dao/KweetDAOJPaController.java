@@ -15,7 +15,8 @@ import javax.persistence.*;
  *
  * @author jeroe
  */
-@Stateless @JPA
+@Stateless
+@JPA
 public class KweetDAOJPaController implements KweetDAO, Serializable {
 
     @PersistenceContext(unitName = "kwetter")
@@ -24,10 +25,6 @@ public class KweetDAOJPaController implements KweetDAO, Serializable {
 
     public void setEm(EntityManager em) {
         this.em = em;
-    }
-    
-    public KweetDAOJPaController(){
-        
     }
 
     @Override
@@ -55,22 +52,12 @@ public class KweetDAOJPaController implements KweetDAO, Serializable {
 
     @Override
     public void DeleteKweet(Kweet kweet) {
-
-        em.getTransaction().begin();
-    //    em.merge(kweet);
         em.remove(kweet);
-        em.getTransaction().commit();
     }
 
     @Override
     public void AddKweet(Kweet kweet) {
-        try {
-            em.getTransaction().begin();
-            em.merge(kweet);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            s = ex.toString();
-        }
+        em.merge(kweet);
     }
 
     @Override

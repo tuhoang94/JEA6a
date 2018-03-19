@@ -10,11 +10,15 @@ import domain.Kweet;
 import domain.User;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
+
 
 /**
  *
  * @author Ronal
  */
+@Stateless @Default
 public class KweetDAOImpl implements KweetDAO {
 
     private List<Kweet> kweets;

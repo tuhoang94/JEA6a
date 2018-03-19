@@ -8,25 +8,27 @@ package rest;
 import domain.Role;
 import domain.User;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import service.UserService;
+import service.UserServiceImpl;
 
 /**
  *
  * @author Ronal
  */
 @Path("user")
-@Produces({MediaType.APPLICATION_JSON})
 @Stateless
 public class UserREST {
 
-    @Inject 
-    UserService userService;
+    @Inject
+    UserServiceImpl userService;
 
     @GET
     @Path("add")
@@ -48,10 +50,12 @@ public class UserREST {
             this.userService.createUser(b);
             this.userService.createUser(c);
             this.userService.createUser(d);
+
+            System.out.print("printline for addMockUser rest");
             return "Mock users added";
         } catch (Exception e) {
             System.out.print(e);
-            return(e.getMessage());
+            return (e.getMessage());
         }
 
     }
@@ -88,11 +92,11 @@ public class UserREST {
     }
 
     @DELETE
-    @Path("/delete/")
+    @Path("/delete/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public void removeUser(@Context HttpServletResponse response, @PathParam("username") String username) {
+    public void removeUser(@Context HttpServletResponse response, @PathParam("id") Long id) {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        User user = this.userService.getUserByUsername(username);
+        User user = this.userService.findUserById(id);
         this.userService.deleteUser(user);
     }
 

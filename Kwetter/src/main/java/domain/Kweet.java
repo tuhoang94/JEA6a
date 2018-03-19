@@ -5,12 +5,17 @@
  */
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.enterprise.inject.Model;
 import javax.persistence.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
+@Model
 @Table(name = "kweet")
 /**
  *
@@ -19,7 +24,7 @@ import javax.persistence.*;
 public class Kweet implements Comparable<Kweet> {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "kid")
     private Long id;
     @Column(name = "message")
@@ -29,6 +34,9 @@ public class Kweet implements Comparable<Kweet> {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "owner")
     private User user;
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "kweet_likedAccounts",
@@ -42,6 +50,9 @@ public class Kweet implements Comparable<Kweet> {
             )
     )
     private List<User> likedAccounts;
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "kweet_MentionedAccounts",
@@ -55,6 +66,9 @@ public class Kweet implements Comparable<Kweet> {
             )
     )
     private List<User> mentions;
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "Kweet_Hashtag",
@@ -72,8 +86,8 @@ public class Kweet implements Comparable<Kweet> {
     public Kweet() {
 
     }
-    
-        public Kweet(String message, User user) {
+
+    public Kweet(String message, User user) {
         this.message = message;
         this.user = user;
         this.date = new Date();

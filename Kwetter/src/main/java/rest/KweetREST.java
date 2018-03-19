@@ -10,29 +10,32 @@ import domain.User;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import service.KweetService;
+import service.KweetServiceImpl;
 import service.UserService;
+import service.UserServiceImpl;
 
 /**
  *
  * @author Ronal
  */
-@Path("/kweet")
-@Produces({MediaType.APPLICATION_JSON})
+@Path("kweet")
 @Stateless
 public class KweetREST {
 
-    @Inject
-    KweetService kweetService;
+    @Inject 
+    KweetServiceImpl kweetService;
 
     @Inject
-    UserService userService;
+    UserServiceImpl userService;
 
     @GET
     @Path("/get")

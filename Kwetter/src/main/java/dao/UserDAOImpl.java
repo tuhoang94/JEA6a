@@ -8,19 +8,18 @@ package dao;
 import domain.User;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
+
 
 /**
  *
  * @author Ronal
  */
+@Stateless @Default
 public class UserDAOImpl implements UserDAO {
 
-    List<User> users;
-
-    public UserDAOImpl() {
-        users = new ArrayList<User>();
-
-    }
+    List<User> users= new ArrayList<User>();;
 
     @Override
     public List<User> GetAllUsers() {

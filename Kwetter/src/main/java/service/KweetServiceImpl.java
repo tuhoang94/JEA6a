@@ -14,63 +14,56 @@ import domain.Kweet;
 import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 /**
  *
  * @author Ronal
  */
-@Stateless
-public class KweetServiceImpl implements KweetService{
+@Stateless @Default
+public class KweetServiceImpl{
 
-    @Inject 
+    @Inject @JPA
     private KweetDAO kweetDao;
     
-    @Inject
+    @Inject @JPA
     private UserDAO userDao;
     
     private User loggedInUser;
     
-    @Override
     public List<Kweet> findallKweets() {
         return this.kweetDao.GetAllKweets();
     }
 
-    @Override
     public User getLoggedInUser() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public List<Kweet> getMentionsFromUser(User user) {
         return this.kweetDao.GetKweetByMentionUsername(user.getUsername());
     }
 
-    @Override
     public List<Kweet> getTweetsFromUser(User user) {
         return this.kweetDao.GetKweetsByUser(user.getID());
     }
 
-    @Override
     public void createKweet(Kweet kweet) {
         this.kweetDao.AddKweet(kweet);
     }
 
-    @Override
     public void deleteKweet(long id) {
         Kweet kweet = this.getKweetById(id);
         this.kweetDao.DeleteKweet(kweet);
 
     }
 
-    @Override
     public Kweet getKweetById(long id) {
         return this.kweetDao.GetKweetById(id);
     }
 
-    @Override
     public List<Kweet> getKweetByHastagId(long id) {
         return this.kweetDao.GetKweetByHashtagId(id);
     }
-    
+
 }

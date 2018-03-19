@@ -15,13 +15,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.lang.annotation.RetentionPolicy;
 
-/**
- * Created by Nekkyou on 13-3-2017.
- */
+
 @Qualifier
-@Retention(RUNTIME)
-@Target({METHOD, FIELD, PARAMETER, TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Target({FIELD, METHOD, TYPE, PARAMETER})
 public @interface JPA {
 }

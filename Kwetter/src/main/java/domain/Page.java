@@ -5,6 +5,7 @@
  */
 package domain;
 
+import javax.enterprise.inject.Model;
 import javax.persistence.*;
 
 /**
@@ -12,7 +13,7 @@ import javax.persistence.*;
  * @author Ronal
  */
 @Table(name = "page")
-@Entity
+@Entity @Model
 public class Page {
 
     @Id @GeneratedValue (strategy = GenerationType.IDENTITY)

@@ -7,13 +7,18 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.inject.Model;
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 
 /**
  *
  * @author Ronal
  */
-@Entity
+@Entity @Model
 @Table(name = "user")
 @NamedQueries({
     @NamedQuery(
@@ -49,6 +54,7 @@ public class User {
     private Page pageInfo;
     @Column(name = "profilephoto")
     private String profilePhoto;
+    @JsonIgnore @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "user_followsusers",
@@ -61,10 +67,13 @@ public class User {
             )
     )
     private List<User> followingAccounts = new ArrayList<>();
+    @JsonIgnore @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(mappedBy = "followingAccounts")
     private List<User> followersAccounts = new ArrayList<>();
+    @JsonIgnore @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Kweet> kweets = new ArrayList<>();
+    @JsonIgnore @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(mappedBy = "mentions")
     private List<Kweet> mention = new ArrayList<>();
 

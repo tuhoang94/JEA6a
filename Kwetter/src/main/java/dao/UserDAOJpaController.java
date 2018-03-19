@@ -24,10 +24,6 @@ public class UserDAOJpaController implements UserDAO, Serializable {
     public void setEm(EntityManager em) {
         this.em = em;
     }
-    
-    public UserDAOJpaController(){
-        
-    }
 
     @Override
     public List<User> GetAllUsers() {
@@ -64,29 +60,16 @@ public class UserDAOJpaController implements UserDAO, Serializable {
 
     @Override
     public void AddUser(User user) {
-        System.out.println("JPA AddUser called");
-        em.getTransaction().begin();
         em.merge(user);
-        em.getTransaction().commit();
     }
 
     @Override
     public void DeleteUser(User user) {
-        em.getTransaction().begin();
         em.remove(user);
-        em.getTransaction().commit();
     }
 
     @Override
     public void EditUser(User user) {
-        try{
-        em.getTransaction().begin();
         em.merge(user);
-        em.getTransaction().commit();
-        }
-        catch(Exception ex)
-        {
-            String s = ex.toString();
-        }
     }
 }

@@ -5,6 +5,7 @@
  */
 package domain;
 
+import javax.enterprise.inject.Model;
 import javax.persistence.*;
 
 import javax.persistence.Id;
@@ -13,7 +14,7 @@ import javax.persistence.Id;
  *
  * @author Ronal
  */
-@Entity
+@Entity @Model
 @Table(name = "hashtag")
 public class Hashtag {
 
