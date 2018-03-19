@@ -5,7 +5,9 @@
  */
 package service;
 
+import dao.JPA;
 import dao.UserDAO;
+import dao.UserDAOJpaController;
 import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -15,9 +17,9 @@ import javax.inject.Inject;
  *
  * @author Ronal
  */
-@Stateless
+@Stateless 
 public class UserServiceImpl implements UserService {
-    @Inject
+    @Inject 
     UserDAO userDAO;
 
     @Override

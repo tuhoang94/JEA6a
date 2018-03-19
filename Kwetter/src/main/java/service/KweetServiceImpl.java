@@ -5,8 +5,11 @@
  */
 package service;
 
+import dao.JPA;
 import dao.KweetDAO;
+import dao.KweetDAOJPaController;
 import dao.UserDAO;
+import dao.UserDAOJpaController;
 import domain.Kweet;
 import domain.User;
 import java.util.List;
@@ -20,7 +23,7 @@ import javax.inject.Inject;
 @Stateless
 public class KweetServiceImpl implements KweetService{
 
-    @Inject
+    @Inject 
     private KweetDAO kweetDao;
     
     @Inject

@@ -5,6 +5,7 @@
  */
 package rest;
 
+import domain.Role;
 import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -24,13 +25,35 @@ import service.UserService;
 @Stateless
 public class UserREST {
 
-    @Inject
+    @Inject 
     UserService userService;
-    
+
     @GET
     @Path("add")
-    public String test(){
+    public String test() {
         return "Üser API called test";
+    }
+
+    @GET
+    @Path("inserttest")
+    public String addMockUsers(@Context HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        try {
+            User a = new User(Role.USER, "Jaap", "pass123", "profilePhoto1");
+            User b = new User(Role.USER, "Piet", "pass123", "profilePhoto2");
+            User c = new User(Role.USER, "Bob", "pass123", "profilePhoto3");
+            User d = new User(Role.USER, "Aap", "pass123", "profilePhoto4");
+            this.userService.createUser(a);
+            this.userService.createUser(b);
+            this.userService.createUser(c);
+            this.userService.createUser(d);
+            return "Mock users added";
+        } catch (Exception e) {
+            System.out.print(e);
+            return(e.getMessage());
+        }
+
     }
 
     @GET
@@ -76,25 +99,20 @@ public class UserREST {
     @POST
     @Path("/follow")
     @Produces({MediaType.APPLICATION_JSON})
-    public void followUser(@Context HttpServletResponse response, @PathParam("username") String username, @PathParam("otherUsername") String otherUsername) throws Exception{
+    public void followUser(@Context HttpServletResponse response, @PathParam("username") String username, @PathParam("otherUsername") String otherUsername) throws Exception {
         response.setHeader("Access-Control-Allow-Origin", "*");
         User user = this.userService.getUserByUsername(username);
         User otherUser = this.userService.getUserByUsername(otherUsername);
         this.userService.followUser(user, otherUser);
     }
-    
+
     @POST
     @Path("/unfollow")
     @Produces({MediaType.APPLICATION_JSON})
-    public void unfollowUser(@Context HttpServletResponse response, @PathParam("username") String username, @PathParam("otherUsername") String otherUsername) throws Exception{
+    public void unfollowUser(@Context HttpServletResponse response, @PathParam("username") String username, @PathParam("otherUsername") String otherUsername) throws Exception {
         response.setHeader("Access-Control-Allow-Origin", "*");
         User user = this.userService.getUserByUsername(username);
         User otherUser = this.userService.getUserByUsername(otherUsername);
         this.userService.unfollowUser(user, otherUser);
     }
-
-
-
-
-
 }

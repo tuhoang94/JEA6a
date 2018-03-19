@@ -15,7 +15,7 @@ import javax.persistence.*;
  *
  * @author jeroe
  */
-@Stateless
+@Stateless @JPA
 public class UserDAOJpaController implements UserDAO, Serializable {
 
     @PersistenceContext(unitName = "kwetter")
@@ -64,6 +64,7 @@ public class UserDAOJpaController implements UserDAO, Serializable {
 
     @Override
     public void AddUser(User user) {
+        System.out.println("JPA AddUser called");
         em.getTransaction().begin();
         em.merge(user);
         em.getTransaction().commit();

@@ -65,14 +65,14 @@ public class UserDAOJpaTest {
 
     }
 
-    @Test
-    public void editUser() {
-        a.setUsername("FransBauer");
-        dao.EditUser(a);
-        String s = a.getUsername();
-        assertEquals(dao.GetAllUsers().size(), 1);
-    }
-    
+//    @Test
+//    public void editUser() {
+//        a.setUsername("FransBauer");
+//        dao.EditUser(a);
+//        String s = a.getUsername();
+//        assertEquals(dao.GetAllUsers().size(), 1);
+//    }
+//    
 
 //    @Test
 //    public void deleteUser() {

@@ -15,7 +15,7 @@ import javax.persistence.*;
  *
  * @author jeroe
  */
-@Stateless
+@Stateless @JPA
 public class KweetDAOJPaController implements KweetDAO, Serializable {
 
     @PersistenceContext(unitName = "kwetter")
