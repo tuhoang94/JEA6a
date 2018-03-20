@@ -8,15 +8,12 @@ package rest;
 import domain.Role;
 import domain.User;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import service.UserService;
 import service.UserServiceImpl;
 
 /**
@@ -34,6 +31,13 @@ public class UserREST {
     @Path("add")
     public String test() {
         return "Üser API called test";
+    }
+    
+    @POST
+    @Path("test")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String postParamTest(@FormParam("test") String test, @FormParam("test2") String test2) {
+        return test + test2;
     }
 
     @GET
@@ -76,13 +80,12 @@ public class UserREST {
         return this.userService.findUserById(id);
     }
 
-    @PUT
-    @Path("/put/{id}")
+    @POST
+    @Path("/create/")
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public User createUser(@Context HttpServletResponse response, @PathParam("username") String username, @PathParam("password") String password) {
+    public User createUser(@Context HttpServletResponse response, User user) {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        User user = new User(username, password);
-
         try {
             userService.createUser(user);
             return user;
@@ -103,7 +106,7 @@ public class UserREST {
     @POST
     @Path("/follow")
     @Produces({MediaType.APPLICATION_JSON})
-    public void followUser(@Context HttpServletResponse response, @PathParam("username") String username, @PathParam("otherUsername") String otherUsername) throws Exception {
+    public void followUser(@Context HttpServletResponse response, @FormParam("username") String username, @FormParam("otherUsername") String otherUsername) throws Exception {
         response.setHeader("Access-Control-Allow-Origin", "*");
         User user = this.userService.getUserByUsername(username);
         User otherUser = this.userService.getUserByUsername(otherUsername);
@@ -113,7 +116,7 @@ public class UserREST {
     @POST
     @Path("/unfollow")
     @Produces({MediaType.APPLICATION_JSON})
-    public void unfollowUser(@Context HttpServletResponse response, @PathParam("username") String username, @PathParam("otherUsername") String otherUsername) throws Exception {
+    public void unfollowUser(@Context HttpServletResponse response, @FormParam("username") String username, @FormParam("otherUsername") String otherUsername) throws Exception {
         response.setHeader("Access-Control-Allow-Origin", "*");
         User user = this.userService.getUserByUsername(username);
         User otherUser = this.userService.getUserByUsername(otherUsername);
