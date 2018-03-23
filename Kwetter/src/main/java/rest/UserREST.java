@@ -101,6 +101,42 @@ public class UserREST {
         }
     }
 
+    @GET
+    @Path("/get/{id}/followers")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getFollowers(@Context HttpServletResponse response, @PathParam("id") long id) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        try {
+            User user = this.userService.findUserById(id);
+            List<User> followers = user.getFollowers();
+            if (user != null) {
+                return Response.ok(followers).build();
+            } else {
+                return Response.status(Status.NOT_FOUND).build();
+            }
+        } catch (Exception ex) {
+            return Response.serverError().build();
+        }
+    }
+    
+        @GET
+    @Path("/get/{id}/following")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getFollowing(@Context HttpServletResponse response, @PathParam("id") long id) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        try {
+            User user = this.userService.findUserById(id);
+            List<User> followers = user.getFollowing();
+            if (user != null) {
+                return Response.ok(followers).build();
+            } else {
+                return Response.status(Status.NOT_FOUND).build();
+            }
+        } catch (Exception ex) {
+            return Response.serverError().build();
+        }
+    }
+
     @POST
     @Path("/create/")
     @Consumes({MediaType.APPLICATION_JSON})
@@ -135,7 +171,7 @@ public class UserREST {
             if (user != null && otherUser != null) {
                 this.userService.followUser(user, otherUser);
                 return Response.ok().build();
-            }else{
+            } else {
                 return Response.status(Status.NOT_FOUND).build();
             }
         } catch (Exception ex) {
@@ -154,4 +190,5 @@ public class UserREST {
         User otherUser = this.userService.getUserByUsername(otherUsername);
         this.userService.unfollowUser(user, otherUser);
     }
+
 }
