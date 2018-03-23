@@ -55,7 +55,7 @@ public class User {
     @Column(name = "profilephoto")
     private String profilePhoto;
     @JsonIgnore @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany
     @JoinTable(
             name = "user_followsusers",
             joinColumns = @JoinColumn(

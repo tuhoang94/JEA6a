@@ -5,6 +5,36 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Test Post</h1>
+        <form action="http://localhost:8080/kwetter/rest/user/test" method="post">
+            <p>
+                Name : <input type="text" name="test" />
+            </p>
+            <p>
+                Age : <input type="text" name="test2" />
+            </p>
+            <input type="submit" value="test" />
+        </form>
+
+        <h1>Add follower</h1>
+        <form action="http://localhost:8080/kwetter/rest/user/follow" method="post">
+            <p>
+                Username : <input type="text" name="username" />
+            </p>
+            <p>
+                Follow(username) : <input type="text" name="otherUsername" />
+            </p>
+            <input type="submit" value="Follow" />
+        </form>
+                <h1>Remove follower</h1>
+        <form action="http://localhost:8080/kwetter/rest/user/unfollow" method="post">
+            <p>
+                Username : <input type="text" name="username" />
+            </p>
+            <p>
+                Follow(username) : <input type="text" name="otherUsername" />
+            </p>
+            <input type="submit" value="Follow" />
+        </form>
     </body>
 </html>

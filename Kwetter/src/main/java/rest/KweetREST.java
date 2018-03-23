@@ -70,18 +70,18 @@ public class KweetREST {
         return this.kweetService.getKweetByHastagId(id);
     }
 
-    @PUT
-    @Path("/put/create/{id}")
+    @POST
+    @Path("/create")
     @Produces({MediaType.APPLICATION_JSON})
-    public void createKweet(@Context HttpServletResponse response, @PathParam("userid") long userid, @PathParam("message") String message) {
+    public void createKweet(@Context HttpServletResponse response, @FormParam("userid") long userid, @FormParam("message") String message) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         User _user = this.userService.findUserById(userid);
         Kweet _kweet = new Kweet(message, _user);
         this.kweetService.createKweet(_kweet);
     }
 
-    @POST
-    @Path("/post/delete")
+    @DELETE
+    @Path("/delete/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public void deleteKweet(@Context HttpServletResponse response, @FormParam("id") long id) {
         response.setHeader("Access-Control-Allow-Origin", "*");

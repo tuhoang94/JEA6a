@@ -8,15 +8,14 @@ package rest;
 import domain.Role;
 import domain.User;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import service.UserService;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import service.UserServiceImpl;
 
 /**
@@ -34,6 +33,13 @@ public class UserREST {
     @Path("add")
     public String test() {
         return "Üser API called test";
+    }
+
+    @POST
+    @Path("test")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String postParamTest(@FormParam("test") String test, @FormParam("test2") String test2) {
+        return test + test2;
     }
 
     @GET
@@ -63,26 +69,44 @@ public class UserREST {
     @GET
     @Path("/get/")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<User> getUsers(@Context HttpServletResponse response) {
+    public Response getUsers(@Context HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        return this.userService.findAllUsers();
+        try {
+            List<User> users = this.userService.findAllUsers();
+            if (users != null) {
+                return Response.ok(users).build();
+            } else {
+                return Response.status(Status.NOT_FOUND).build();
+            }
+        } catch (Exception ex) {
+            return Response.serverError().build();
+
+        }
     }
 
     @GET
     @Path("/get/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public User getUser(@Context HttpServletResponse response, @PathParam("id") long id) {
+    public Response getUser(@Context HttpServletResponse response, @PathParam("id") long id) {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        return this.userService.findUserById(id);
+        try {
+            User user = this.userService.findUserById(id);
+            if (user != null) {
+                return Response.ok(user).build();
+            } else {
+                return Response.status(Status.NOT_FOUND).build();
+            }
+        } catch (Exception ex) {
+            return Response.serverError().build();
+        }
     }
 
-    @PUT
-    @Path("/put/{id}")
+    @POST
+    @Path("/create/")
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public User createUser(@Context HttpServletResponse response, @PathParam("username") String username, @PathParam("password") String password) {
+    public User createUser(@Context HttpServletResponse response, User user) {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        User user = new User(username, password);
-
         try {
             userService.createUser(user);
             return user;
@@ -103,17 +127,28 @@ public class UserREST {
     @POST
     @Path("/follow")
     @Produces({MediaType.APPLICATION_JSON})
-    public void followUser(@Context HttpServletResponse response, @PathParam("username") String username, @PathParam("otherUsername") String otherUsername) throws Exception {
+    public Response followUser(@Context HttpServletResponse response, @FormParam("username") String username, @FormParam("otherUsername") String otherUsername) throws Exception {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        User user = this.userService.getUserByUsername(username);
-        User otherUser = this.userService.getUserByUsername(otherUsername);
-        this.userService.followUser(user, otherUser);
+        try {
+            User user = this.userService.getUserByUsername(username);
+            User otherUser = this.userService.getUserByUsername(otherUsername);
+            if (user != null && otherUser != null) {
+                this.userService.followUser(user, otherUser);
+                return Response.ok().build();
+            }else{
+                return Response.status(Status.NOT_FOUND).build();
+            }
+        } catch (Exception ex) {
+            return Response.serverError().build();
+        }
+
+//        this.userService.followUser(user, otherUser);
     }
 
     @POST
     @Path("/unfollow")
     @Produces({MediaType.APPLICATION_JSON})
-    public void unfollowUser(@Context HttpServletResponse response, @PathParam("username") String username, @PathParam("otherUsername") String otherUsername) throws Exception {
+    public void unfollowUser(@Context HttpServletResponse response, @FormParam("username") String username, @FormParam("otherUsername") String otherUsername) throws Exception {
         response.setHeader("Access-Control-Allow-Origin", "*");
         User user = this.userService.getUserByUsername(username);
         User otherUser = this.userService.getUserByUsername(otherUsername);
