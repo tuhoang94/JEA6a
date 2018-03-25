@@ -48,7 +48,7 @@ public class UserREST {
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         try {
-            User a = new User(Role.USER, "Jaap", "pass123", "profilePhoto1");
+            User a = new User(Role.MODERATOR, "Jaap", "pass123", "profilePhoto1");
             User b = new User(Role.USER, "Piet", "pass123", "profilePhoto2");
             User c = new User(Role.USER, "Bob", "pass123", "profilePhoto3");
             User d = new User(Role.USER, "Aap", "pass123", "profilePhoto4");

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <style type="text/css">
+            .col-xs-updated {        
+                width: 92% !important;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-brand">Edit User </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-xs-updated">
+                    <h:form styleClass="form-horizontal">
+                        <div class="form-group">
+                            <h:outputLabel value="ID" styleClass="control-label col-sm-2"/>
+                            <div class="col-sm-10">
+                                <h:inputText value="#{adminBean.user.ID}" styleClass="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Username" styleClass="control-label col-sm-2"/>
+                            <div class="col-sm-10">
+                                <h:inputText value="#{adminBean.user.username}" styleClass="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Password" styleClass="control-label col-sm-2"/>
+                            <div class="col-sm-10">
+                                <h:inputText value="#{adminBean.user.password}" styleClass="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Role" styleClass="control-label col-sm-2"/>
+                            <div class="col-sm-10">
+                                <h:selectOneMenu id="role" value="#{adminBean.user.role}" >
+                                    <f:selectItem itemLabel="MODERATOR" itemValue="0" />
+                                    <f:selectItem itemLabel="USER" itemValue="1" />
+                                </h:selectOneMenu>                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <h:commandButton value="Edit" styleClass="btn btn-default" />
+                            </div>
+                        </div>
+                    </h:form>
+            </div>
+        </div>
+    </div>
+                    </h:body>
+                    </html>
+

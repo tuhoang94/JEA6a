@@ -5,13 +5,17 @@
  */
 package bean;
 
+import domain.Kweet;
+import domain.Role;
 import domain.User;
+import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import service.KweetServiceImpl;
 import service.UserServiceImpl;
 
 /**
@@ -27,8 +31,50 @@ public class AdminBean {
      */
     @Inject
     private UserServiceImpl service;
+    private KweetServiceImpl kweetService;
     private String username;
     private String password;
+    private List<User> users;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void deleteUser(User user) {
+        try {
+            service.deleteUser(service.findUserById(user.getID()));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void deleteKweet(Kweet kweet) {
+        this.kweetService.deleteKweet(kweet.getId());
+    }
+
+    public String editPageUser(User user) {
+        this.setUser(user);
+        return "UpdateUserPage";
+    }
+
+    public String kweetPageUser(User user) {
+        this.setUser(user);
+        return "KweetsUserPage";
+    }
+
+    public List<User> getUsers() {
+        users = service.findAllUsers();
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
     public AdminBean() {
     }
@@ -37,14 +83,18 @@ public class AdminBean {
         User user = service.getUserByUsername(username);
         if (user != null) {
             if (user.getPassword().equals(password)) {
-                return "AdminPage";
+                if (user.getRole().equals(Role.MODERATOR)) {
+                    return "AdminPage";
+                } else {
+                    FacesContext.getCurrentInstance().addMessage("error", new FacesMessage("Error: Only moderators are allowed."));
+                }
             } else {
-                FacesContext.getCurrentInstance().addMessage("password", new FacesMessage("Error: Your password is WRONG. Try again."));
+                FacesContext.getCurrentInstance().addMessage("error", new FacesMessage("Error: Your password is WRONG. Try again."));
             }
         } else {
-            FacesContext.getCurrentInstance().addMessage("password", new FacesMessage("Error: Account with this username doesn't exist. Try again."));
+            FacesContext.getCurrentInstance().addMessage("error", new FacesMessage("Error: Account with this username doesn't exist. Try again."));
         }
-        return "false";
+        return "Someonething went wrong. Try again later.";
 
     }
 
