@@ -34,6 +34,7 @@ public class AdminBean {
     private KweetServiceImpl kweetService;
     private String username;
     private String password;
+
     private List<User> users;
     private User user;
 
@@ -41,16 +42,25 @@ public class AdminBean {
         return user;
     }
 
+    public Role[] getRoles() {
+        return Role.values();
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
 
-    public void deleteUser(User user) {
+    public String deleteUser(User user) {
+        User u = service.findUserById(user.getID());
         try {
-            service.deleteUser(service.findUserById(user.getID()));
+            service.deleteUser(u);
+            return "AdminPage";
         } catch (Exception ex) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(ex.getMessage()));
             System.out.println(ex.getMessage());
         }
+        return "Cant delete this user";
     }
 
     public void deleteKweet(Kweet kweet) {
@@ -65,6 +75,15 @@ public class AdminBean {
     public String kweetPageUser(User user) {
         this.setUser(user);
         return "KweetsUserPage";
+    }
+
+    public String updateUser() {
+        this.service.editUser(this.user);
+        return "AdminPage";
+    }
+
+    public void editRole(User user) {
+
     }
 
     public List<User> getUsers() {
@@ -86,15 +105,15 @@ public class AdminBean {
                 if (user.getRole().equals(Role.MODERATOR)) {
                     return "AdminPage";
                 } else {
-                    FacesContext.getCurrentInstance().addMessage("error", new FacesMessage("Error: Only moderators are allowed."));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error: Only moderators are allowed."));
                 }
             } else {
-                FacesContext.getCurrentInstance().addMessage("error", new FacesMessage("Error: Your password is WRONG. Try again."));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error: Your password is WRONG. Try again."));
             }
         } else {
-            FacesContext.getCurrentInstance().addMessage("error", new FacesMessage("Error: Account with this username doesn't exist. Try again."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error: Account with this username doesn't exist. Try again."));
         }
-        return "Someonething went wrong. Try again later.";
+        return null;
 
     }
 

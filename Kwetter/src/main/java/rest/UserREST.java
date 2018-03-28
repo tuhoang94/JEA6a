@@ -178,7 +178,6 @@ public class UserREST {
             return Response.serverError().build();
         }
 
-//        this.userService.followUser(user, otherUser);
     }
 
     @POST

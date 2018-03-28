@@ -14,6 +14,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
+    <distributionManagement>
+        <repository>
+            <id>git.repo</id>
+            <name>Github repo</name>
+            <url>https://github.com/tuhoang94/JEA6a.git</url>
+        </repository>
+    </distributionManagement>
+    
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

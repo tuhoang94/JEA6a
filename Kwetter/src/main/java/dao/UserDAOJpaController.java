@@ -65,7 +65,9 @@ public class UserDAOJpaController implements UserDAO, Serializable {
 
     @Override
     public void DeleteUser(User user) {
-        em.remove(user);
+       // em.remove(user);
+       //Bij deleten vanuit Bean kan het object niet direct verwijderen.
+       em.remove(em.merge(user));
     }
 
     @Override

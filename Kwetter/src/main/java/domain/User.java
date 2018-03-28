@@ -42,7 +42,7 @@ public class User {
 
     @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "uid")
-    private Long id;
+    private Long ID;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -81,8 +81,8 @@ public class User {
         
     }
     
-    public User(Long id, Role role, String username, String password, String profilePhoto) {
-        this.id = id;
+    public User(Long ID, Role role, String username, String password, String profilePhoto) {
+        this.ID = ID;
         this.role = role;
         this.username = username;
         this.password = password;
@@ -102,11 +102,11 @@ public class User {
     }
 
     public Long getID() {
-        return id;
+        return ID;
     }
 
-    public void SetID(Long id) {
-        this.id = id;
+    public void SetID(Long ID) {
+        this.ID = ID;
     }
 
     public Role getRole() {

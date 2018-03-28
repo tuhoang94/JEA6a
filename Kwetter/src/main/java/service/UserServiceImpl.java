@@ -34,6 +34,11 @@ public class UserServiceImpl{
             userDAO.EditUser(user);
         }
     }
+    
+    public void editUser(User user){
+        User test = user;
+        //userDAO.EditUser(user);
+    }
 
     public User findUserById(long id) {
         return userDAO.GetUserById(id);
