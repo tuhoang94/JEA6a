@@ -5,6 +5,7 @@
  */
 package rest;
 
+import domain.Kweet;
 import domain.Role;
 import domain.User;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import service.KweetServiceImpl;
 import service.UserServiceImpl;
 
 /**
@@ -28,6 +30,9 @@ public class UserREST {
 
     @Inject
     UserServiceImpl userService;
+
+    @Inject
+    KweetServiceImpl kweetService;
 
     @GET
     @Path("add")
@@ -56,6 +61,8 @@ public class UserREST {
             this.userService.createUser(b);
             this.userService.createUser(c);
             this.userService.createUser(d);
+            Kweet k = new Kweet("Hallo alles goed?", a);
+            this.kweetService.createKweet(k);
 
             System.out.print("printline for addMockUser rest");
             return "Mock users added";
@@ -118,8 +125,8 @@ public class UserREST {
             return Response.serverError().build();
         }
     }
-    
-        @GET
+
+    @GET
     @Path("/get/{id}/following")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getFollowing(@Context HttpServletResponse response, @PathParam("id") long id) {

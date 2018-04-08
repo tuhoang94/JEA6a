@@ -2,6 +2,7 @@ rest\AppConfig.class
 dao\UserDAOJpaController.class
 domain\Role.class
 domain\Hashtag.class
+bean\SessionBean.class
 dao\KweetDAO.class
 service\KweetServiceImpl.class
 domain\Kweet.class
@@ -9,6 +10,7 @@ service\UserService.class
 dao\KweetDAOJPaController.class
 bean\AdminBean.class
 rest\KweetREST.class
+bean\AuthBean.class
 dao\JPA.class
 domain\Page.class
 rest\UserREST.class

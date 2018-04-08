@@ -34,9 +34,18 @@ public class AdminBean {
     private KweetServiceImpl kweetService;
     private String username;
     private String password;
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     private List<User> users;
-    private User user;
+    private User user = new User();
 
     public User getUser() {
         return user;
@@ -54,7 +63,7 @@ public class AdminBean {
         User u = service.findUserById(user.getID());
         try {
             service.deleteUser(u);
-            return "AdminPage";
+            return "testTable";
         } catch (Exception ex) {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage(ex.getMessage()));
@@ -74,7 +83,7 @@ public class AdminBean {
 
     public String kweetPageUser(User user) {
         this.setUser(user);
-        return "KweetsUserPage";
+        return "testKweets";
     }
 
     public String updateUser() {
@@ -82,7 +91,19 @@ public class AdminBean {
         return "AdminPage";
     }
 
-    public void editRole(User user) {
+    public String editRole() {
+        try {
+            System.out.println(user);
+            User userEdit = service.getUserByUsername(user.getUsername());
+            userEdit.setRole(user.getRole());
+            System.out.println(userEdit);
+            this.service.editUser(userEdit);
+            return "testTable";
+        } catch (Exception ex) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(ex.getMessage()));
+        }
+        return null;
 
     }
 

@@ -4,6 +4,7 @@ C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\dao\JPA
 C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\dao\KweetDAO.java
 C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\dao\UserDAO.java
 C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\rest\KweetREST.java
+C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\bean\AuthBean.java
 C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\domain\Role.java
 C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\domain\Page.java
 C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\service\KweetService.java
@@ -14,6 +15,7 @@ C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\bean\Ad
 C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\domain\Kweet.java
 C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\rest\UserREST.java
 C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\domain\User.java
+C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\bean\SessionBean.java
 C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\rest\AppConfig.java
 C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\dao\UserDAOJpaController.java
 C:\Users\Ronal\Desktop\School\S6\JEA6a\Git Kwetter\Kwetter\src\main\java\service\UserService.java

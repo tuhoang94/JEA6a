@@ -28,15 +28,20 @@
                                             <p:growl autoUpdate="true" />
                                             <div class="row">
                                                 <div class="col s12 input-field">
-                                                    <h:inputText id="username" value="#{adminBean.username}" required="true" requiredMessage="User required" />
+                                                    <h:inputText id="username" value="#{authBean.username}" required="true" requiredMessage="User required"></h:inputText>
                                                     <h:outputLabel for="username" value="User" />
+                                                    <h:outputLabel for="username" value="#{authBean.username}" />
+
                                                 </div>
                                                 <div class="col s12 input-field">
-                                                    <h:inputText id="password" required="true" value="#{adminBean.password}" requiredMessage="Password required!" />
+                                                    <h:inputText id="password" required="true" value="#{authBean.password}" requiredMessage="Password required!" />
                                                     <h:outputLabel for="password" value="Password" />
                                                 </div>
                                                 <div class="col s12 input-field">
-                                                    <h:commandLink value="Login" styleClass="btn btn-large" action="testTable"/>
+                                                    <h:commandLink value="Login" styleClass="btn btn-large" action="#{authBean.LoginTemp}"/>
+                                                </div>
+                                                <div class="col s12 input-field">
+                                                    <h:messages globalOnly="true" />
                                                 </div>
                                             </div>
                                         </h:form>
