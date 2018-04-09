@@ -14,7 +14,12 @@
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-
+        <style>
+            select {
+                display: unset;
+                width: unset;
+            }
+        </style>
     </h:head>
     <h:body styleClass="cyan lighten-5">
         <nav class="cyan">
@@ -44,16 +49,16 @@
                                         <div class="row">
                                             <div class="input-field col s6">
                                                 <h:outputLabel value="Username"/>
-                                                <h:inputText value="#{adminBean.user.username}" />
+                                                <h:inputText value="#{adminBean.user.username}" disabled="true"/>
                                             </div>
                                             <div class="input-field col s6">
                                                 <h:outputLabel value="Password" />
-                                                <h:inputText value="#{adminBean.user.password}"/>
+                                                <h:inputText value="****" disabled="true"/>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="input-field col s12">
-                                                <h:outputLabel value="Role"/>
+                                            <div class="input-field col s6">
+                                                <h:outputLabel value="Role" for="roleID"/>
                                                 <h:selectOneMenu id="roleID" value="#{adminBean.user.role}">
                                                     <f:selectItems value="#{adminBean.roles}" var="role"/>
                                                 </h:selectOneMenu>   
@@ -64,7 +69,7 @@
                                                 <h:commandLink value="Edit" styleClass="btn btn-large" action="#{adminBean.editRole}"/>
 
                                             </div>                                           
-                                            <div class="col s2">
+                                            <div class="col s1">
                                                 <h:link value="Back" styleClass="btn btn-large" outcome="testTable" />
 
                                             </div>

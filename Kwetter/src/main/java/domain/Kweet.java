@@ -31,8 +31,8 @@ public class Kweet implements Comparable<Kweet> {
     private String message;
     @Column(name = "date")
     private Date date;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "owner")
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinColumn(name = "userID")
     private User user;
     @JsonIgnore
     @LazyCollection(LazyCollectionOption.FALSE)

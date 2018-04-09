@@ -7,6 +7,8 @@ package bean;
 
 import domain.Role;
 import domain.User;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -14,6 +16,7 @@ import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.security.Principal;
 import javax.faces.application.FacesMessage;
 
 import service.UserServiceImpl;
@@ -59,8 +62,11 @@ public class AuthBean implements Serializable {
     public String Login() {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-
+        System.out.println(request.getSession().toString());
         try {
+            if (request.getUserPrincipal() != null) {
+                request.logout();
+            }
             request.login(username, password);
             User loggedInUser = userService.getUserByUsername(request.getUserPrincipal().getName());
             this.sessionBean.setLoggedInUser(loggedInUser);
@@ -88,7 +94,6 @@ public class AuthBean implements Serializable {
 //            User loggedInUser = userService.getUserByUsername(userPrincipal.getName());
 //            this.sessionBean.setLoggedInUser(loggedInUser);
         } catch (ServletException e) {
-            //e.printStackTrace();
 
             context.addMessage(null, new FacesMessage(e.getMessage()));
         }
@@ -101,7 +106,7 @@ public class AuthBean implements Serializable {
         if (user != null) {
             if (user.getPassword().equals(password)) {
                 if (user.getRole().equals(Role.MODERATOR)) {
-                     this.sessionBean.setLoggedInUser(user);
+                    this.sessionBean.setLoggedInUser(user);
                     return "testTable";
                 } else {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error: Only moderators are allowed."));

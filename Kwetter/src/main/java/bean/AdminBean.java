@@ -78,7 +78,7 @@ public class AdminBean {
 
     public String editPageUser(User user) {
         this.setUser(user);
-        return "UpdateUserPage";
+        return "testEdit";
     }
 
     public String kweetPageUser(User user) {

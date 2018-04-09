@@ -52,7 +52,7 @@
     <!--Defining type of authenitcation mechanism-->  
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>login-jaas-realm</realm-name>
+        <realm-name>KwetterDS2</realm-name>
         <form-login-config>
             <form-login-page>/testLogin.xhtml</form-login-page>
             <form-error-page>/testLogin.xhtml</form-error-page>

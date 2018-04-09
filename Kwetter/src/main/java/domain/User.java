@@ -71,7 +71,7 @@ public class User {
     @ManyToMany(mappedBy = "followingAccounts")
     private List<User> followersAccounts = new ArrayList<>();
     @JsonIgnore @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<Kweet> kweets = new ArrayList<>();
     @JsonIgnore @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(mappedBy = "mentions")

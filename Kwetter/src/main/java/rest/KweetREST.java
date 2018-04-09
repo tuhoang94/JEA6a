@@ -31,7 +31,7 @@ import service.UserServiceImpl;
 @Stateless
 public class KweetREST {
 
-    @Inject 
+    @Inject
     KweetServiceImpl kweetService;
 
     @Inject
@@ -49,8 +49,17 @@ public class KweetREST {
     @Path("/get/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Kweet getKweetById(@Context HttpServletResponse response, @PathParam("id") long id) {
-        response.setHeader("Access-Control-Allow-Origin", "*");        
+        response.setHeader("Access-Control-Allow-Origin", "*");
         return this.kweetService.getKweetById(id);
+    }
+
+    @GET
+    @Path("/get/userkweet/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Kweet> getKweetsByUser(@Context HttpServletResponse response, @PathParam("id") long id) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        User _user = this.userService.findUserById(id);
+        return this.kweetService.getTweetsFromUser(_user);
     }
 
     @GET
