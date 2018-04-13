@@ -108,6 +108,27 @@ public class UserREST {
         }
     }
 
+    @POST
+    @Path("/login")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response Login(@Context HttpServletResponse response, @FormParam("username") String username, @FormParam("password") String password) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH,OPTIONS");
+        try {
+            User user = this.userService.getUserByUsername(username);
+            if (user != null) {
+                if (user.getPassword().equals(password)) {
+                    return Response.ok(user).header("Access-Control-Allow-Origin", "*").build();
+                }
+            } else {
+                return Response.status(Status.NOT_FOUND).build();   
+            }
+        } catch (Exception ex) {
+            return Response.serverError().build();
+        }
+        return null;
+    }
+
     @GET
     @Path("/get/{id}/followers")
     @Produces({MediaType.APPLICATION_JSON})
