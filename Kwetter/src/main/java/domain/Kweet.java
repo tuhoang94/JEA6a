@@ -17,6 +17,40 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Model
 @Table(name = "kweet")
+
+
+@NamedQueries({
+        @NamedQuery(
+                name = "Kweet.findAll",
+                query = "SELECT k FROM Kweet k"
+        )
+        ,
+        @NamedQuery(
+                name = "Kweet.findById",
+                query = "SELECT k FROM kweet k WHERE k.id = :id"
+        )
+        ,
+        @NamedQuery(
+                name = "Kweet.findByUserName",
+                query = "SELECT k FROM Kweet k WHERE k.userID = (SELECT u.id FROM User u WHERE u.username=:username)"
+        ),
+
+        @NamedQuery(
+                name = "Kweet.getByHashTag",
+                query =  "SELECT k from Kweet k WHERE k.id = (SELECT K.id FROM Kweet_Hashtag kh WHERE kh.hastag_id = :hid)"
+        ),
+
+        @NamedQuery(
+                name = "Kweet.getKweetWithMentions",
+                query = "SELECT k FROM Kweet k WHERE k.id = (SELECT k.id FROM kweet_MentionedAccounts km WHERE kw.user_id = (SELECT u.id FROM User u WHERE u.username = :username))"
+        ),
+
+        @NamedQuery(
+                name = "Kweet.findByUserID",
+                query = "SELECT k FROM Kweet k WHERE k.userID = :uid"
+        )
+}
+)
 /**
  *
  * @author Ronal
