@@ -32,7 +32,8 @@ public class KweetDAOJPaController implements KweetDAO, Serializable {
     @Override
     public List<Kweet> GetAllKweets() {
 
-        TypedQuery<Kweet> query = em.createNamedQuery("Kweet.findAll", Kweet.class);
+        String sql = "SELECT k FROM Kweet k";
+        TypedQuery<Kweet> query = em.createQuery(sql, Kweet.class);
         try {
             return query.getResultList();
         } catch (NoResultException ex) {
@@ -42,8 +43,8 @@ public class KweetDAOJPaController implements KweetDAO, Serializable {
 
     @Override
     public Kweet GetKweetById(long id) {
-      //  String sql = "SELECT k FROM kweet k WHERE k.id = :id";
-        TypedQuery<Kweet> query = em.createNamedQuery("Kweet.findById", Kweet.class)
+        String sql = "SELECT k FROM kweet k WHERE k.kid = :id";
+        TypedQuery<Kweet> query = em.createQuery(sql, Kweet.class)
                 .setParameter("id", id);
         try {
             return (Kweet) query.getSingleResult();
@@ -65,8 +66,8 @@ public class KweetDAOJPaController implements KweetDAO, Serializable {
     @Override
     public List<Kweet> GetKweetByMentionUsername(String username) {
         try {
-            //String sql = "SELECT k FROM Kweet k WHERE k.id = (SELECT k.id FROM kweet_MentionedAccounts km WHERE kw.user_id = (SELECT u.id FROM User u WHERE u.username = :username))";
-            TypedQuery<Kweet> query = em.createNamedQuery("Kweet.getKweetWithMentions", Kweet.class)
+            String sql = "SELECT k FROM Kweet k WHERE k.kid = (SELECT km.kid FROM kweet_MentionedAccounts km WHERE km.user_id = (SELECT u.uid FROM User u WHERE u.username = :username))";
+            TypedQuery<Kweet> query = em.createQuery(sql, Kweet.class)
                     .setParameter("username", username);
 
             return query.getResultList();
@@ -77,8 +78,8 @@ public class KweetDAOJPaController implements KweetDAO, Serializable {
 
     @Override
     public List<Kweet> GetKweetByHashtagId(long hastagId) {
-        //String sql = "SELECT k from Kweet k WHERE k.id = (SELECT K.id FROM Kweet_Hashtag kh WHERE kh.hastag_id = :hid)";
-        TypedQuery<Kweet> query = em.createNamedQuery("Kweet.getByHashTag", Kweet.class)
+        String sql = "SELECT k from Kweet k WHERE k.kid = (SELECT kh.kid FROM Kweet_Hashtag kh WHERE kh.hastag_id = :hid)";
+        TypedQuery<Kweet> query = em.createQuery(sql, Kweet.class)
                 .setParameter("hid", hastagId);
         try {
             return query.getResultList();
@@ -89,8 +90,8 @@ public class KweetDAOJPaController implements KweetDAO, Serializable {
 
     @Override
     public List<Kweet> GetKweetsByUser(long userId) {
-        //String sql = "SELECT k FROM Kweet k WHERE k.owner = :uid";
-        TypedQuery<Kweet> query = em.createNamedQuery("Kweet.findByUserID", Kweet.class)
+        String sql = "SELECT k FROM Kweet k WHERE k.owner = :uid";
+        TypedQuery<Kweet> query = em.createQuery(sql, Kweet.class)
                 .setParameter("uid", userId);
         try {
             return query.getResultList();
