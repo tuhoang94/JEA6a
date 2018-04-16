@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import service.KweetService;
 import service.KweetServiceImpl;
 import service.UserService;
@@ -36,13 +37,30 @@ public class KweetREST {
 
     @Inject
     UserServiceImpl userService;
+////
+////    @GET
+////    @Path("/get")
+////    @Produces({MediaType.APPLICATION_JSON})
+////    public List<Kweet> getKweets(@Context HttpServletResponse response) {
+////        response.setHeader("Access-Control-Allow-Origin", "*");
+////        return this.kweetService.findallKweets();
+////    }
 
     @GET
-    @Path("/get")
+    @Path("/get/")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Kweet> getKweets(@Context HttpServletResponse response) {
+    public Response getKweets(@Context HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        return this.kweetService.findallKweets();
+        try {
+            List<Kweet> kweets = this.kweetService.findallKweets();
+            if (kweets != null) {
+                return Response.ok(kweets).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+        } catch (Exception ex) {
+            return Response.serverError().build();
+        }
     }
 
     @GET

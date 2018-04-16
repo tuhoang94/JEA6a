@@ -13,12 +13,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-
 /**
  *
  * @author Ronal
  */
-@Entity @Model
+@Entity
+@Model
 @Table(name = "user")
 @NamedQueries({
     @NamedQuery(
@@ -40,10 +40,12 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 public class User {
 
-    @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "uid")
     private Long ID;
-
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
     @Enumerated(EnumType.STRING)
     private Role role;
     @Column(name = "username")
@@ -54,7 +56,8 @@ public class User {
     private Page pageInfo;
     @Column(name = "profilephoto")
     private String profilePhoto;
-    @JsonIgnore @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
     @JoinTable(
             name = "user_followsusers",
@@ -67,20 +70,23 @@ public class User {
             )
     )
     private List<User> followingAccounts = new ArrayList<>();
-    @JsonIgnore @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(mappedBy = "followingAccounts")
     private List<User> followersAccounts = new ArrayList<>();
-    @JsonIgnore @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<Kweet> kweets = new ArrayList<>();
-    @JsonIgnore @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(mappedBy = "mentions")
     private List<Kweet> mention = new ArrayList<>();
 
-    public User(){
-        
+    public User() {
+
     }
-    
+
     public User(Long ID, Role role, String username, String password, String profilePhoto) {
         this.ID = ID;
         this.role = role;
@@ -88,8 +94,8 @@ public class User {
         this.password = password;
         this.profilePhoto = profilePhoto;
     }
-    
-        public User(Role role, String username, String password, String profilePhoto) {
+
+    public User(Role role, String username, String password, String profilePhoto) {
         this.role = role;
         this.username = username;
         this.password = password;

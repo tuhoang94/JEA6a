@@ -43,7 +43,8 @@ public class KweetDAOJPaController implements KweetDAO, Serializable {
 
     @Override
     public Kweet GetKweetById(long id) {
-        String sql = "SELECT k FROM kweet k WHERE k.kid = :id";
+
+        String sql = "SELECT k FROM Kweet k WHERE k.id = :id";
         TypedQuery<Kweet> query = em.createQuery(sql, Kweet.class)
                 .setParameter("id", id);
         try {
@@ -90,7 +91,7 @@ public class KweetDAOJPaController implements KweetDAO, Serializable {
 
     @Override
     public List<Kweet> GetKweetsByUser(long userId) {
-        String sql = "SELECT k FROM Kweet k WHERE k.owner = :uid";
+        String sql = "SELECT k FROM Kweet k WHERE k.user.id = :uid";
         TypedQuery<Kweet> query = em.createQuery(sql, Kweet.class)
                 .setParameter("uid", userId);
         try {

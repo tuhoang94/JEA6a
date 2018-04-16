@@ -69,7 +69,7 @@ public class Kweet implements Comparable<Kweet> {
     private Date date;
     @JsonIgnore
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "userID")
     private User user;
     @JsonIgnore
