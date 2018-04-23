@@ -95,4 +95,9 @@ public class KweetDAOImpl implements KweetDAO {
         return userKweets;
     }
 
+    @Override
+    public void EditKweet(Kweet kweet) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

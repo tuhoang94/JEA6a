@@ -52,7 +52,7 @@ public class User {
     private String username;
     @Column(name = "password")
     private String password;
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private Page pageInfo;
     @Column(name = "profilephoto")
     private String profilePhoto;
@@ -93,6 +93,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.profilePhoto = profilePhoto;
+        this.pageInfo = new Page("","","", this);
     }
 
     public User(Role role, String username, String password, String profilePhoto) {
@@ -100,6 +101,8 @@ public class User {
         this.username = username;
         this.password = password;
         this.profilePhoto = profilePhoto;
+        this.pageInfo = new Page("","","", this);
+
     }
 
     public User(String username, String password) {

@@ -144,7 +144,7 @@ public class UserTest {
      */
     @Test
     public void testSetPage() {
-        Page p = new Page(123l, "pBio", "pLocation", "pWebsite", "pThema", a);
+        Page p = new Page(123l, "pBio", "pLocation", "pWebsite");
         a.setPage(p);
         assertEquals(a.getPage().bio, "pBio");
     }

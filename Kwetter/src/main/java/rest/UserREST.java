@@ -6,8 +6,11 @@
 package rest;
 
 import domain.Kweet;
+import domain.Page;
 import domain.Role;
 import domain.User;
+import dto.UserDTO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -53,17 +56,26 @@ public class UserREST {
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         try {
+            //Page page = new Page("biotest", "locationtest", "www.test.nl", "Color BLUE");
+            //Page pageB = new Page("biotest", "locationtest", "www.test.nl", "Color BLUE");
+
             User a = new User(Role.MODERATOR, "Jaap", "pass123", "profilePhoto1");
+            //OneToOne user-page
+            // a.setPage(page);
+            // page.setUser(a);
             User b = new User(Role.USER, "Piet", "pass123", "profilePhoto2");
+            //  b.setPage(pageB);
+            //  pageB.setUser(b);
             User c = new User(Role.USER, "Bob", "pass123", "profilePhoto3");
             User d = new User(Role.USER, "Aap", "pass123", "profilePhoto4");
             this.userService.createUser(a);
             this.userService.createUser(b);
             this.userService.createUser(c);
             this.userService.createUser(d);
-            Kweet k = new Kweet("Hallo alles goed?", a);
-            this.kweetService.createKweet(k);
-
+             Kweet k = new Kweet("Hallo alles goed?", a);
+             this.kweetService.createKweet(k);
+            a.getPage().setBio("kutaapje");
+            this.userService.editUser(a);
             System.out.print("printline for addMockUser rest");
             return "Mock users added";
         } catch (Exception e) {
@@ -80,8 +92,15 @@ public class UserREST {
         response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             List<User> users = this.userService.findAllUsers();
-            if (users != null) {
-                return Response.ok(users).build();
+            System.out.println("Size users:" + users.size());
+
+            List<UserDTO> usersDTO = new ArrayList<>();
+            for (User user : users) {
+                UserDTO userDTO = new UserDTO(user);
+                usersDTO.add(userDTO);
+            }
+            if (usersDTO != null) {
+                return Response.ok(usersDTO).build();
             } else {
                 return Response.status(Status.NOT_FOUND).build();
             }
@@ -98,8 +117,9 @@ public class UserREST {
         response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             User user = this.userService.findUserById(id);
+            UserDTO userDTO = new UserDTO(user);
             if (user != null) {
-                return Response.ok(user).build();
+                return Response.ok(userDTO).build();
             } else {
                 return Response.status(Status.NOT_FOUND).build();
             }
@@ -108,12 +128,14 @@ public class UserREST {
         }
     }
 
+    
+    //TODO: TOKEN BASED
     @POST
     @Path("/login")
     @Produces({MediaType.APPLICATION_JSON})
     public Response Login(@Context HttpServletResponse response, @FormParam("username") String username, @FormParam("password") String password) {
 
-        System.out.println("username:" + username + " password:" +password);
+        System.out.println("username:" + username + " password:" + password);
         try {
             User user = this.userService.getUserByUsername(username);
             if (user != null) {
@@ -129,16 +151,24 @@ public class UserREST {
         return null;
     }
 
-    @GET
-    @Path("/get/{id}/followers")
+    @POST
+    @Path("/editprofile")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getFollowers(@Context HttpServletResponse response, @PathParam("id") long id) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+    public Response editProfile(@Context HttpServletResponse response, @FormParam("id") Long id, @FormParam("username") String username, @FormParam("password") String password, @FormParam("bio") String bio, @FormParam("location") String location, @FormParam("website") String website) {
+
         try {
             User user = this.userService.findUserById(id);
-            List<User> followers = user.getFollowers();
+
             if (user != null) {
-                return Response.ok(followers).build();
+                user.setUsername(username);
+                user.setPassword(password);
+                user.getPage().setBio(bio);
+                user.getPage().setLocation(location);
+                user.getPage().setWebsite(website);
+
+                this.userService.editUser(user);
+                return Response.ok().build();
+
             } else {
                 return Response.status(Status.NOT_FOUND).build();
             }
@@ -148,15 +178,43 @@ public class UserREST {
     }
 
     @GET
-    @Path("/get/{id}/following")
+    @Path("/followers/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getFollowers(@Context HttpServletResponse response, @PathParam("id") long id) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        try {
+            User user = this.userService.findUserById(id);
+            List<User> followers = user.getFollowers();
+            List<UserDTO> usersDTO = new ArrayList<>();
+            if (user != null) {
+                for(User u : followers){
+                    UserDTO userDTO = new UserDTO(u);
+                    usersDTO.add(userDTO);
+                }
+                return Response.ok(usersDTO).build();
+            } else {
+                return Response.status(Status.NOT_FOUND).build();
+            }
+        } catch (Exception ex) {
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Path("/following/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getFollowing(@Context HttpServletResponse response, @PathParam("id") long id) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             User user = this.userService.findUserById(id);
-            List<User> followers = user.getFollowing();
+            List<User> following = user.getFollowing();
+            List<UserDTO> usersDTO = new ArrayList<>();
             if (user != null) {
-                return Response.ok(followers).build();
+                for(User u : following){
+                    UserDTO userDTO = new UserDTO(u);
+                    usersDTO.add(userDTO);
+                }
+                return Response.ok(usersDTO).build();
             } else {
                 return Response.status(Status.NOT_FOUND).build();
             }
@@ -180,7 +238,7 @@ public class UserREST {
     }
 
     @DELETE
-    @Path("/delete/{id}")
+    @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public void removeUser(@Context HttpServletResponse response, @PathParam("id") Long id) {
         response.setHeader("Access-Control-Allow-Origin", "*");

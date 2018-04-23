@@ -8,6 +8,7 @@ package service;
 import dao.JPA;
 import dao.UserDAO;
 import dao.UserDAOJpaController;
+import domain.Kweet;
 import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;

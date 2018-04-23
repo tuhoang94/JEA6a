@@ -21,17 +21,20 @@ import javax.inject.Inject;
  *
  * @author Ronal
  */
-@Stateless @Default
-public class KweetServiceImpl{
+@Stateless
+@Default
+public class KweetServiceImpl {
 
-    @Inject @JPA
+    @Inject
+    @JPA
     private KweetDAO kweetDao;
-    
-    @Inject @JPA
+
+    @Inject
+    @JPA
     private UserDAO userDao;
-    
+
     private User loggedInUser;
-    
+
     public List<Kweet> findallKweets() {
         return this.kweetDao.GetAllKweets();
     }
@@ -64,6 +67,16 @@ public class KweetServiceImpl{
 
     public List<Kweet> getKweetByHastagId(long id) {
         return this.kweetDao.GetKweetByHashtagId(id);
+    }
+
+    public void likeKweet(User user, Kweet kweet) {
+        kweet.addLike(user);
+        this.kweetDao.EditKweet(kweet);
+    }
+
+    public void unlikeKweet(User user, Kweet kweet) {
+        kweet.removeLike(user);
+        this.kweetDao.EditKweet(kweet);
     }
 
 }
