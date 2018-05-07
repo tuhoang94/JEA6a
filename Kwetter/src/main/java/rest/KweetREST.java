@@ -52,7 +52,7 @@ public class KweetREST {
     @Path("/get")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getKweets(@Context HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+        //response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             List<Kweet> kweets = this.kweetService.findallKweets();
             List<KweetDTO> KweetsDTO = new ArrayList<>();
@@ -111,6 +111,32 @@ public class KweetREST {
             return Response.serverError().build();
         }
 
+    }
+
+    @GET
+    @Path("/kweetsfollowing/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getKweetsFollowing(@Context HttpServletResponse response, @PathParam("id") long id) {
+        //response.setHeader("Access-Control-Allow-Origin", "*");
+        try {
+            User user = this.userService.findUserById(id);
+
+            if (user != null) {
+                List<KweetDTO> kweetsFollowing = new ArrayList<>();
+                for (User u : user.getFollowing()) {
+                    for (Kweet kweet : u.getKweets()) {
+                        KweetDTO kweetDTO = new KweetDTO(kweet);
+                        kweetsFollowing.add(kweetDTO);
+                    }
+                }
+                return Response.ok(kweetsFollowing).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).build();
+
+            }
+        } catch (Exception ex) {
+            return Response.serverError().build();
+        }
     }
 
     @GET

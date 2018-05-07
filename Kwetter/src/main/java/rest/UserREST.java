@@ -68,6 +68,7 @@ public class UserREST {
             //  pageB.setUser(b);
             User c = new User(Role.USER, "Bob", "pass123", "profilePhoto3");
             User d = new User(Role.USER, "Aap", "pass123", "profilePhoto4");
+
             this.userService.createUser(a);
             this.userService.createUser(b);
             this.userService.createUser(c);
@@ -140,7 +141,10 @@ public class UserREST {
             User user = this.userService.getUserByUsername(username);
             if (user != null) {
                 if (user.getPassword().equals(password)) {
-                    return Response.ok(user).build();
+                    UserDTO userDTO = new UserDTO(user);
+                    //Create token
+                    //issueToken(username, password);
+                    return Response.ok(userDTO).build();
                 }
             } else {
                 return Response.status(Status.NOT_FOUND).build();
@@ -149,6 +153,14 @@ public class UserREST {
             return Response.serverError().build();
         }
         return null;
+    }
+    
+       private String issueToken(String username, String password) {
+        // Issue a token (can be a random String persisted to a database or a JWT token)
+        // The issued token must be associated to a user
+        // Return the issued token
+        
+        return "";
     }
 
     @POST
