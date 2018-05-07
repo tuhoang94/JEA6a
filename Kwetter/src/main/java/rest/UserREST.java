@@ -5,11 +5,14 @@
  */
 package rest;
 
+import org.pac4j.http.profile.HttpProfile;
+import org.pac4j.jwt.profile.JwtGenerator;
 import domain.Kweet;
 import domain.Page;
 import domain.Role;
 import domain.User;
 import dto.UserDTO;
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -20,6 +23,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import service.KweetServiceImpl;
 import service.UserServiceImpl;
 
@@ -142,6 +147,7 @@ public class UserREST {
             if (user != null) {
                 if (user.getPassword().equals(password)) {
                     UserDTO userDTO = new UserDTO(user);
+                    //JWTVerifier verifier = JWT.require(Algorithm.HMAC256(keyHMAC)).build();
                     //Create token
                     //issueToken(username, password);
                     return Response.ok(userDTO).build();
@@ -160,7 +166,26 @@ public class UserREST {
         // The issued token must be associated to a user
         // Return the issued token
         
-        return "";
+        Security.addProvider(new BouncyCastleProvider());
+final String signingSecret = RandomStringUtils.randomAlphanumeric(256);
+final String encryptionSecret = RandomStringUtils.randomAlphanumeric(32);
+JwtGenerator<HttpProfile> g = new JwtGenerator<>(signingSecret, encryptionSecret);
+final HttpProfile profile = new HttpProfile();
+profile.setId("<PRINCIPAL_ID>");
+final String token = g.generate(profile);
+return token;        
+             
+//        Key key = keyGenerator.generateKey();
+//        String jwtToken = Jwts.builder()
+//                .setSubject(username)
+//                .setIssuer(uriInfo.getAbsolutePath().toString())
+//                .setIssuedAt(new Date())
+//                .setExpiration(toDate(LocalDateTime.now().plusMinutes(15L)))
+//                .signWith(SignatureAlgorithm.HS512, key)
+//                .compact();
+//        return jwtToken;
+        
+        
     }
 
     @POST
