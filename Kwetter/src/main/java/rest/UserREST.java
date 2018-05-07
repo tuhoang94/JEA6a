@@ -78,8 +78,8 @@ public class UserREST {
             this.userService.createUser(b);
             this.userService.createUser(c);
             this.userService.createUser(d);
-             Kweet k = new Kweet("Hallo alles goed?", a);
-             this.kweetService.createKweet(k);
+            Kweet k = new Kweet("Hallo alles goed?", a);
+            this.kweetService.createKweet(k);
             a.getPage().setBio("kutaapje");
             this.userService.editUser(a);
             System.out.print("printline for addMockUser rest");
@@ -134,7 +134,6 @@ public class UserREST {
         }
     }
 
-    
     //TODO: TOKEN BASED
     @POST
     @Path("/login")
@@ -148,8 +147,8 @@ public class UserREST {
                 if (user.getPassword().equals(password)) {
                     UserDTO userDTO = new UserDTO(user);
                     //JWTVerifier verifier = JWT.require(Algorithm.HMAC256(keyHMAC)).build();
-                    //Create token
-                    //issueToken(username, password);
+                    //Create token                    
+                    userDTO.setSecurityToken(issueToken());
                     return Response.ok(userDTO).build();
                 }
             } else {
@@ -160,21 +159,21 @@ public class UserREST {
         }
         return null;
     }
-    
-       private String issueToken(String username, String password) {
+
+    private String issueToken() {
         // Issue a token (can be a random String persisted to a database or a JWT token)
         // The issued token must be associated to a user
         // Return the issued token
-        
+
         Security.addProvider(new BouncyCastleProvider());
-final String signingSecret = RandomStringUtils.randomAlphanumeric(256);
-final String encryptionSecret = RandomStringUtils.randomAlphanumeric(32);
-JwtGenerator<HttpProfile> g = new JwtGenerator<>(signingSecret, encryptionSecret);
-final HttpProfile profile = new HttpProfile();
-profile.setId("<PRINCIPAL_ID>");
-final String token = g.generate(profile);
-return token;        
-             
+        final String signingSecret = RandomStringUtils.randomAlphanumeric(256);
+        final String encryptionSecret = RandomStringUtils.randomAlphanumeric(32);
+        JwtGenerator<HttpProfile> g = new JwtGenerator<>(signingSecret, encryptionSecret);
+        final HttpProfile profile = new HttpProfile();
+        profile.setId("<PRINCIPAL_ID>");
+        final String token = g.generate(profile);
+        return token;
+
 //        Key key = keyGenerator.generateKey();
 //        String jwtToken = Jwts.builder()
 //                .setSubject(username)
@@ -184,8 +183,6 @@ return token;
 //                .signWith(SignatureAlgorithm.HS512, key)
 //                .compact();
 //        return jwtToken;
-        
-        
     }
 
     @POST
@@ -224,7 +221,7 @@ return token;
             List<User> followers = user.getFollowers();
             List<UserDTO> usersDTO = new ArrayList<>();
             if (user != null) {
-                for(User u : followers){
+                for (User u : followers) {
                     UserDTO userDTO = new UserDTO(u);
                     usersDTO.add(userDTO);
                 }
@@ -247,7 +244,7 @@ return token;
             List<User> following = user.getFollowing();
             List<UserDTO> usersDTO = new ArrayList<>();
             if (user != null) {
-                for(User u : following){
+                for (User u : following) {
                     UserDTO userDTO = new UserDTO(u);
                     usersDTO.add(userDTO);
                 }

@@ -17,15 +17,16 @@ import java.util.List;
  * @author Ronal
  */
 public class UserDTO {
-    
+
     private Long ID;
     private String role;
     private String username;
     private String password;
     private String bio;
     private String location;
-    private String website;    
+    private String website;
     private String profilePhoto;
+    private String securityToken;
     private int followingAccountsCount;
     private int followersAccountsCount;
     private int kweetsCount;
@@ -40,8 +41,8 @@ public class UserDTO {
         this.location = user.getPage().getLocation();
         this.website = user.getPage().getWebsite();
         this.profilePhoto = user.getProfilePhoto();
-        this.followersAccountsCount= user.getFollowers().size();
-        this.followingAccountsCount= user.getFollowing().size();
+        this.followersAccountsCount = user.getFollowers().size();
+        this.followingAccountsCount = user.getFollowing().size();
         this.kweetsCount = user.getKweets().size();
         this.mentionCount = user.getMentions().size();
     }
@@ -141,10 +142,13 @@ public class UserDTO {
     public void setMentionCount(int mentionCount) {
         this.mentionCount = mentionCount;
     }
-    
-    
-    
-    
-    
+
+    public String getSecurityToken() {
+        return securityToken;
+    }
+
+    public void setSecurityToken(String securityToken) {
+        this.securityToken = securityToken;
+    }
 
 }
