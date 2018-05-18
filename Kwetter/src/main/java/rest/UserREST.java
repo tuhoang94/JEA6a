@@ -81,6 +81,8 @@ public class UserREST {
             Kweet k = new Kweet("Hallo alles goed?", a);
             this.kweetService.createKweet(k);
             a.getPage().setBio("kutaapje");
+            a.getPage().setLocation("Eindhoven");
+            a.getPage().setWebsite("www.google.nl");
             this.userService.editUser(a);
             System.out.print("printline for addMockUser rest");
             return "Mock users added";

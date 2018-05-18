@@ -190,11 +190,27 @@ public class KweetREST {
     @POST
     @Path("/create")
     @Produces({MediaType.APPLICATION_JSON})
-    public void createKweet(@Context HttpServletResponse response, @FormParam("userid") long userid, @FormParam("message") String message) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        User _user = this.userService.findUserById(userid);
-        Kweet _kweet = new Kweet(message, _user);
-        this.kweetService.createKweet(_kweet);
+    public Response createKweet(@Context HttpServletResponse response, @FormParam("userid") long userid, @FormParam("message") String message) {
+        //response.setHeader("Access-Control-Allow-Origin", "*");
+        //User _user = this.userService.findUserById(userid);
+       // Kweet _kweet = new Kweet(message, _user);
+       // this.kweetService.createKweet(_kweet);
+
+        try {
+            User user = this.userService.findUserById(userid);
+
+            if (user != null) {
+                Kweet kweet = new Kweet(message, user);
+                this.kweetService.createKweet(kweet);
+                return Response.ok().build();
+
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).build();
+
+            }
+        } catch (Exception ex) {
+            return Response.serverError().build();
+        }
     }
 
     @DELETE
