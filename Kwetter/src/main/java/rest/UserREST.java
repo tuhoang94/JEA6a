@@ -58,7 +58,6 @@ public class UserREST {
     @GET
     @Path("inserttest")
     public String addMockUsers(@Context HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
 
         try {
             //Page page = new Page("biotest", "locationtest", "www.test.nl", "Color BLUE");
@@ -97,7 +96,6 @@ public class UserREST {
     @Path("/get/")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getUsers(@Context HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             List<User> users = this.userService.findAllUsers();
             System.out.println("Size users:" + users.size());
@@ -122,7 +120,6 @@ public class UserREST {
     @Path("/get/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getUser(@Context HttpServletResponse response, @PathParam("id") long id) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             User user = this.userService.findUserById(id);
             UserDTO userDTO = new UserDTO(user);
@@ -150,7 +147,7 @@ public class UserREST {
                     UserDTO userDTO = new UserDTO(user);
                     //JWTVerifier verifier = JWT.require(Algorithm.HMAC256(keyHMAC)).build();
                     //Create token                    
-                    userDTO.setSecurityToken(issueToken());
+                   // userDTO.setSecurityToken(issueToken());
                     return Response.ok(userDTO).build();
                 }
             } else {
@@ -217,7 +214,6 @@ public class UserREST {
     @Path("/followers/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getFollowers(@Context HttpServletResponse response, @PathParam("id") long id) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             User user = this.userService.findUserById(id);
             List<User> followers = user.getFollowers();
@@ -240,7 +236,6 @@ public class UserREST {
     @Path("/following/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getFollowing(@Context HttpServletResponse response, @PathParam("id") long id) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             User user = this.userService.findUserById(id);
             List<User> following = user.getFollowing();
@@ -264,7 +259,6 @@ public class UserREST {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public User createUser(@Context HttpServletResponse response, User user) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             userService.createUser(user);
             return user;
@@ -277,7 +271,6 @@ public class UserREST {
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public void removeUser(@Context HttpServletResponse response, @PathParam("id") Long id) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         User user = this.userService.findUserById(id);
         this.userService.deleteUser(user);
     }
@@ -286,7 +279,6 @@ public class UserREST {
     @Path("/follow")
     @Produces({MediaType.APPLICATION_JSON})
     public Response followUser(@Context HttpServletResponse response, @FormParam("username") String username, @FormParam("otherUsername") String otherUsername) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             User user = this.userService.getUserByUsername(username);
             User otherUser = this.userService.getUserByUsername(otherUsername);
@@ -306,7 +298,6 @@ public class UserREST {
     @Path("/unfollow")
     @Produces({MediaType.APPLICATION_JSON})
     public void unfollowUser(@Context HttpServletResponse response, @FormParam("username") String username, @FormParam("otherUsername") String otherUsername) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         User user = this.userService.getUserByUsername(username);
         User otherUser = this.userService.getUserByUsername(otherUsername);
         this.userService.unfollowUser(user, otherUser);
