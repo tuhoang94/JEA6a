@@ -60,16 +60,9 @@ public class UserREST {
     public String addMockUsers(@Context HttpServletResponse response) {
 
         try {
-            //Page page = new Page("biotest", "locationtest", "www.test.nl", "Color BLUE");
-            //Page pageB = new Page("biotest", "locationtest", "www.test.nl", "Color BLUE");
 
             User a = new User(Role.MODERATOR, "Jaap", "pass123", "profilePhoto1");
-            //OneToOne user-page
-            // a.setPage(page);
-            // page.setUser(a);
             User b = new User(Role.USER, "Piet", "pass123", "profilePhoto2");
-            //  b.setPage(pageB);
-            //  pageB.setUser(b);
             User c = new User(Role.USER, "Bob", "pass123", "profilePhoto3");
             User d = new User(Role.USER, "Aap", "pass123", "profilePhoto4");
 

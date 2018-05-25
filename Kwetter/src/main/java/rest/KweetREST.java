@@ -8,22 +8,16 @@ package rest;
 import domain.Kweet;
 import domain.User;
 import dto.KweetDTO;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import service.KweetService;
 import service.KweetServiceImpl;
-import service.UserService;
 import service.UserServiceImpl;
 
 /**
@@ -39,20 +33,11 @@ public class KweetREST {
 
     @Inject
     UserServiceImpl userService;
-////
-////    @GET
-////    @Path("/get")
-////    @Produces({MediaType.APPLICATION_JSON})
-////    public List<Kweet> getKweets(@Context HttpServletResponse response) {
-////        response.setHeader("Access-Control-Allow-Origin", "*");
-////        return this.kweetService.findallKweets();
-////    }
 
     @GET
     @Path("/get")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getKweets(@Context HttpServletResponse response) {
-        //response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             List<Kweet> kweets = this.kweetService.findallKweets();
             List<KweetDTO> KweetsDTO = new ArrayList<>();
@@ -74,7 +59,6 @@ public class KweetREST {
     @Path("/get/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getKweetById(@Context HttpServletResponse response, @PathParam("id") long id) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             KweetDTO kd = new KweetDTO(this.kweetService.getKweetById(id));
             if (kd != null) {
@@ -92,7 +76,6 @@ public class KweetREST {
     @Path("/get/userkweet/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getKweetsByUser(@Context HttpServletResponse response, @PathParam("id") long id) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             User _user = this.userService.findUserById(id);
             List<Kweet> kweets = this.kweetService.getTweetsFromUser(_user);
@@ -117,7 +100,6 @@ public class KweetREST {
     @Path("/kweetsfollowing/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getKweetsFollowing(@Context HttpServletResponse response, @PathParam("id") long id) {
-        //response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             User user = this.userService.findUserById(id);
 
@@ -143,7 +125,6 @@ public class KweetREST {
     @Path("/get/mention/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getKweetsByMention(@Context HttpServletResponse response, @PathParam("id") long id) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             User _user = this.userService.findUserById(id);
             List<Kweet> kweets = this.kweetService.getMentionsFromUser(_user);
@@ -167,7 +148,6 @@ public class KweetREST {
     @Path("/get/hastag/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getKweetsByHashtag(@Context HttpServletResponse response, @PathParam("id") long id) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             List<Kweet> kweets = this.kweetService.getKweetByHastagId(id);
             List<KweetDTO> dtos = new ArrayList<>();
@@ -191,11 +171,6 @@ public class KweetREST {
     @Path("/create")
     @Produces({MediaType.APPLICATION_JSON})
     public Response createKweet(@Context HttpServletResponse response, @FormParam("userid") long userid, @FormParam("message") String message) {
-        //response.setHeader("Access-Control-Allow-Origin", "*");
-        //User _user = this.userService.findUserById(userid);
-       // Kweet _kweet = new Kweet(message, _user);
-       // this.kweetService.createKweet(_kweet);
-
         try {
             User user = this.userService.findUserById(userid);
 
@@ -217,7 +192,6 @@ public class KweetREST {
     @Path("/delete/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public void deleteKweet(@Context HttpServletResponse response, @FormParam("id") long id) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         this.kweetService.deleteKweet(id);
     }
 
@@ -225,8 +199,6 @@ public class KweetREST {
     @Path("/like")
     @Produces({MediaType.APPLICATION_JSON})
     public Response likeKweet(@Context HttpServletResponse response, @FormParam("userid") long userid, @FormParam("kweetid") long kweetid) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-
         try {
             User user = this.userService.findUserById(userid);
             Kweet kweet = this.kweetService.getKweetById(kweetid);
@@ -249,7 +221,6 @@ public class KweetREST {
     @Path("/unlike")
     @Produces({MediaType.APPLICATION_JSON})
     public Response unlikeKweet(@Context HttpServletResponse response, @FormParam("userid") long userid, @FormParam("kweetid") long kweetid) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             User user = this.userService.findUserById(userid);
             Kweet kweet = this.kweetService.getKweetById(kweetid);
