@@ -7,6 +7,8 @@
 package sockets;
 
 import com.google.gson.Gson;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
 import javax.websocket.EndpointConfig;
@@ -20,8 +22,11 @@ public class JsonEncoder implements Encoder.Text<Message> {
     private final Gson gson = new Gson();
 
     @Override
-    public String encode(Message arg0) throws EncodeException {
-        return gson.toJson(arg0);
+    public String encode(Message msg) throws EncodeException {
+        JsonObject json = Json.createObjectBuilder()
+                .add("user", msg.getUser())
+                .add("message",msg.getMsg()).build();
+        return json.toString();
     }
 
     @Override

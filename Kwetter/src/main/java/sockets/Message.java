@@ -14,20 +14,31 @@ import java.io.Serializable;
  */
 public class Message implements Serializable{
     
-    private String text;
+    private String user;
+    private String msg;
 
     public Message() {
     }
 
-    public Message(String text) {
-        this.text = text;
+    public Message(String usr, String msg) {
+        this.user = usr;
+        this.msg = msg;
     }
 
-    public String getText() {
-        return text;
+    public String getUser() {
+        return this.user;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setUser(String user) {
+        this.user = user;
+    }
+    
+    public String getMsg(){
+        return this.msg;
+    }
+    
+    public void setMsg(String msg){
+        this.msg = msg;
     }
 }
+
