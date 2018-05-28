@@ -5,6 +5,7 @@
  */
 package sockets;
 
+import domain.Kweet;
 import domain.User;
 import dto.KweetDTO;
 import java.io.IOException;
@@ -16,27 +17,41 @@ import java.util.logging.Logger;
 import javax.websocket.Session;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+import service.KweetServiceImpl;
+import service.UserService;
+import service.UserServiceImpl;
 
 /**
  *
  * @author jeroe
  */
-@ServerEndpoint("/echo")
+@ServerEndpoint(
+    value = "/echo",
+    encoders = JsonEncoder.class, 
+    decoders = JsonDecoder.class
+    )
 public class ServerEchoEndpoint {
 
+    UserServiceImpl userserv = new UserServiceImpl();
+    KweetServiceImpl kweetserv = new KweetServiceImpl();
     private static Set<Session> allsessions;
     private static Map<User, Session> usersession;
     private static final Logger LOG = Logger.getLogger(ServerEchoEndpoint.class.getName());
+    JsonEncoder json = new JsonEncoder();
 
     @OnOpen
-    public void open(Session session, EndpointConfig conf, User u) {
+    public void open(Message msg, Session session, EndpointConfig conf) {
         allsessions = session.getOpenSessions();
-        usersession.put(u, session);
+        usersession.put(userserv.getUserByUsername(msg.getUser()), session);
     }
 
     @OnMessage
-    public void onMessage(Session session, KweetDTO message, User u) {
+    public void onMessage(Message message, Session session) {
         //ToDo find the followers and send that kweet to those followers
+        //Message msg = new Message(message);
+        User u = userserv.getUserByUsername(message.getUser());
+        Kweet k = new Kweet(message.getMsg(), u);
+        kweetserv.createKweet(k);
         for (User us : u.getFollowers()) {
             for (User i : usersession.keySet()) {
                 if (i.getID() == us.getID()) {
@@ -61,19 +76,21 @@ public class ServerEchoEndpoint {
             }
         }
     }
-
-    public void sendAllKweets(List<KweetDTO> kdtos, Session session) {
-        for (KweetDTO kto : kdtos) {
-            try {
-                session.getAsyncRemote().sendObject(kto);
-            } catch (Exception ex) {
-                LOG.info("Fout bij het versturen van alle kweets naar: " + session);
-            }
-        }
-    }
-
-    public void SendToFollower(Session session, KweetDTO kdto) {
+//
+//    public void sendAllKweets(List<KweetDTO> kdtos, Session session) {
+//        for (KweetDTO kto : kdtos) {
+//            try {
+//                Message msg = new Message(kto);
+//                session.getAsyncRemote().sendObject(json.encode(msg));
+//            } catch (Exception ex) {
+//                LOG.info("Fout bij het versturen van alle kweets naar: " + session);
+//            }
+//        }
+//    }
+    
+        public void SendToFollower(Session session, Message kdto) {
         try {
+            
             session.getAsyncRemote().sendObject(kdto);
         } catch (Exception ex) {
             LOG.info("Fout bij het versturen van alle kweets naar: " + session);
@@ -81,20 +98,23 @@ public class ServerEchoEndpoint {
 
     }
 
-    public void sendToAll(KweetDTO kdto) {
+//    public void SendToFollower(Session session, KweetDTO kdto) {
+//        try {
+//            session.getAsyncRemote().sendObject(kdto);
+//        } catch (Exception ex) {
+//            LOG.info("Fout bij het versturen van alle kweets naar: " + session);
+//        }
+//
+//    }
+
+    public void sendToAll(Message message) {
         for (Session ses : allsessions) {
             try {
-                ses.getAsyncRemote().sendObject(kdto);
+                ses.getAsyncRemote().sendObject(message);
 
             } catch (Exception ex) {
                 LOG.info("Fout bij het versturen van alle kweets naar: " + ses);
             }
         }
     }
-    
-    public void UpdateFollowers(Session session)
-    {
-     //   for ()
-    }
-
 }
